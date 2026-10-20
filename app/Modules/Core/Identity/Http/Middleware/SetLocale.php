@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Support\Http\Middleware;
+namespace App\Modules\Core\Identity\Http\Middleware;
 
 use App\Modules\Core\Identity\Enums\User\PreferenceKey;
 use App\Modules\Core\Identity\Models\User;
