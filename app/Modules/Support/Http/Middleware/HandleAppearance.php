@@ -45,12 +45,12 @@ class HandleAppearance
     /**
      * Resolve the colour scheme from the signed-in member's stored
      * choice, then from the unencrypted cookie the client writes,
-     * falling back to the device's own preference.
+     * falling back to the device's own PreferenceKey.
      */
     public static function resolve(Request $request): string
     {
         $appearance = ($user = $request->user()) instanceof User
-            ? $user->preference(PreferenceKey::Appearance) ?? $request->cookie(PreferenceKey::Appearance->cookieName())
+            ? $user->PreferenceKey(PreferenceKey::Appearance) ?? $request->cookie(PreferenceKey::Appearance->cookieName())
             : $request->cookie(PreferenceKey::Appearance->cookieName());
 
         return is_string($appearance) && in_array($appearance, self::APPEARANCES, true)
@@ -66,7 +66,7 @@ class HandleAppearance
      */
     protected function synchronize(Request $request, User $user): void
     {
-        $stored = $user->preference(PreferenceKey::Appearance);
+        $stored = $user->PreferenceKey(PreferenceKey::Appearance);
 
         // A stored scheme wins and is written back to the cookie.
         if ($stored !== null) {
@@ -79,7 +79,7 @@ class HandleAppearance
         $cookie = $request->cookie(PreferenceKey::Appearance->cookieName());
 
         if (PreferenceKey::Appearance->accepts($cookie)) {
-            $user->rememberPreference(PreferenceKey::Appearance, $cookie);
+            $user->rememberPreferenceKey(PreferenceKey::Appearance, $cookie);
         }
     }
 }

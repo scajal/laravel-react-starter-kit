@@ -8,11 +8,12 @@ use Illuminate\Http\Request;
 return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(
         fn (Exceptions $exceptions): Exceptions => $exceptions
-            ->shouldRenderJsonWhen(fn (Request $request) => $request->is('api/*') || $request->expectsJson())
             ->dontTruncateRequestExceptions()
+            ->shouldRenderJsonWhen(fn (Request $request) => $request->is('api/*') || $request->expectsJson())
     )
     ->withMiddleware(fn (Middleware $middleware): Middleware => $middleware
-        ->encryptCookies()
+        ->encryptCookies(except: ['appearance', 'filament_language_switch_locale'])
+        ->preventRequestForgery()
         ->web(append: [
             \App\Modules\Support\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,

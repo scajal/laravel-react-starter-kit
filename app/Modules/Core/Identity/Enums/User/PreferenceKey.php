@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Support\Enums;
+namespace App\Modules\Core\Identity\Enums\User;
 
 use Filament\Support\Contracts\HasLabel;
 use Illuminate\Support\Facades\Cookie as CookieJar;

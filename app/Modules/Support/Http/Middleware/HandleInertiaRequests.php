@@ -3,6 +3,7 @@
 namespace App\Modules\Support\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -37,6 +38,16 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
+
+            // The chosen colour scheme, from an unencrypted cookie the
+            // client writes, so the server renders the right one on the
+            // first paint instead of flashing. "system" leaves the
+            // choice to the device.
+            'appearance' => fn (): string => HandleAppearance::resolve($request),
+
+            // The resolved locale, read at render time so it
+            // works for SSR requests too.
+            'locale' => fn (): string => App::currentLocale(),
         ];
     }
 }
