@@ -6,6 +6,8 @@ namespace App\Modules\Core\Identity\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Modules\Core\Identity\Enums\Team\Permission;
+use App\Modules\Core\Identity\Enums\Team\Role;
 use App\Modules\Core\Identity\Enums\User\PreferenceKey;
 use App\Modules\Core\Identity\Models\User\Preference;
 use App\Modules\Support\Concerns\DefinesKeyType;
@@ -16,6 +18,7 @@ use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -74,6 +77,16 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
     use Notifiable;
 
     /**
+     * Determine if the user belongs to the given team.
+     */
+    public function belongsToTeam(Team $team): bool
+    {
+        return $this->teams()
+            ->where($team->getQualifiedKeyName(), $team->getKey())
+            ->exists();
+    }
+
+    /**
      * Indicate if the user can access the administration panel.
      */
     public function canAccessPanel(Panel $panel): bool
@@ -113,6 +126,43 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
     public function getAuthPassword(): string
     {
         return '';
+    }
+
+    /**
+     * Get the current team's foreign key name.
+     */
+    public function getCurrentTeamForeignKey(): string
+    {
+        return 'current_team_id';
+    }
+
+    /**
+     * Determine if the user has the given permission on the team.
+     */
+    public function hasTeamPermission(Team $team, Permission $permission): bool
+    {
+        return $this->teamRole($team)?->grants($permission) ?? false;
+    }
+
+    /**
+     * Get the user's membership of the given team, or null when
+     * they do not belong to it.
+     */
+    public function membershipIn(Team $team): ?Membership
+    {
+        return $this->memberships()
+            ->whereBelongsTo($team)
+            ->first();
+    }
+
+    /**
+     * Get the user's memberships, one per organization they belong to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Modules\Core\Identity\Models\Membership, $this>
+     */
+    public function memberships(): HasMany
+    {
+        return $this->hasMany(Membership::class);
     }
 
     /**
@@ -157,6 +207,28 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
             ['key' => $key],
             ['value' => $value],
         );
+    }
+
+    /**
+     * Get the user's role on the given team.
+     */
+    public function roleIn(Team $team): ?Role
+    {
+        return $this->membershipIn($team)?->role;
+    }
+
+    /**
+     * Get the organizations the user belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Modules\Core\Identity\Models\Team, $this, \App\Modules\Core\Identity\Models\Membership, 'membership'>
+     */
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class, new Membership()->getTable(), $this->getForeignKey(), new Team()->getForeignKey())
+            ->using(Membership::class)
+            ->withPivot(['role'])
+            ->withTimestamps()
+            ->as('membership');
     }
 
     /**
