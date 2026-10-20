@@ -9,7 +9,9 @@ namespace App\Modules\Core\Identity\Models;
 use App\Modules\Core\Identity\Enums\User\PreferenceKey;
 use App\Modules\Core\Identity\Models\User\Preference;
 use App\Modules\Support\Concerns\DefinesKeyType;
+use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -53,7 +55,7 @@ use Spatie\Activitylog\Support\LogOptions;
  */
 #[Fillable(['avatar', 'name', 'email', 'external_id'])]
 #[Hidden(['external_id', 'remember_token'])]
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser, HasLocalePreference
 {
     use CausesActivity;
 
@@ -84,7 +86,6 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
         ];
     }
 
@@ -131,6 +132,15 @@ class User extends Authenticatable
     public function preferences(): HasMany
     {
         return $this->hasMany(Preference::class);
+    }
+
+    /**
+     * Get the locale mail and notifications to the user are
+     * rendered in: the one they stored, or English.
+     */
+    public function preferredLocale(): string
+    {
+        return $this->preference(PreferenceKey::Locale) ?? App::currentLocale();
     }
 
     /**
