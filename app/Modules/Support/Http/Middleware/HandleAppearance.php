@@ -69,7 +69,7 @@ class HandleAppearance
      */
     protected function synchronize(Request $request, User $user): void
     {
-        $stored = $user->PreferenceKey(PreferenceKey::Appearance);
+        $stored = $user->preference(PreferenceKey::Appearance);
 
         // A stored scheme wins and is written back to the cookie.
         if ($stored !== null) {
