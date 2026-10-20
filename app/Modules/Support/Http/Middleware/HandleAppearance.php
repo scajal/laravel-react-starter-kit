@@ -53,7 +53,7 @@ class HandleAppearance
         $user = $request->user();
 
         $appearance = $user instanceof User
-            ? $user->preferenceKey(PreferenceKey::Appearance) ?? $request->cookie(PreferenceKey::Appearance->cookieName())
+            ? $user->preference(PreferenceKey::Appearance)
             : $request->cookie(PreferenceKey::Appearance->cookieName());
 
         return is_string($appearance) && in_array($appearance, self::APPEARANCES, true)
@@ -82,7 +82,7 @@ class HandleAppearance
         $cookie = $request->cookie(PreferenceKey::Appearance->cookieName());
 
         if (PreferenceKey::Appearance->accepts($cookie)) {
-            $user->rememberPreferenceKey(PreferenceKey::Appearance, $cookie);
+            $user->rememberPreference(PreferenceKey::Appearance, $cookie);
         }
     }
 }

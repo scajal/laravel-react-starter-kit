@@ -82,8 +82,11 @@ class SetLocale
      */
     protected function stored(Request $request): ?string
     {
+        /** @var \App\Modules\Core\Identity\Models\User|null $user */
+        $user = $request->user();
+
         // A visitor who is not signed in has nothing stored.
-        if (($user = $request->user()) instanceof User) {
+        if (! $user instanceof User) {
             return null;
         }
 

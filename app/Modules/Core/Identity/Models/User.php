@@ -9,6 +9,7 @@ namespace App\Modules\Core\Identity\Models;
 use App\Modules\Core\Identity\Enums\User\PreferenceKey;
 use App\Modules\Core\Identity\Models\User\Preference;
 use App\Modules\Support\Concerns\DefinesKeyType;
+use App\Modules\Support\Concerns\HasActivation;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Contracts\Translation\HasLocalePreference;
@@ -53,7 +54,7 @@ use Spatie\Activitylog\Support\LogOptions;
  *
  * @mixin \Eloquent
  */
-#[Fillable(['avatar', 'name', 'email', 'external_id'])]
+#[Fillable(['avatar', 'email', 'external_id', 'is_active', 'name'])]
 #[Hidden(['external_id', 'remember_token'])]
 class User extends Authenticatable implements FilamentUser, HasLocalePreference
 {
@@ -61,6 +62,8 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference
 
     /** @use \App\Modules\Support\Concerns\DefinesKeyType<string> */
     use DefinesKeyType;
+
+    use HasActivation;
 
     /** @use \Illuminate\Database\Eloquent\Factories\HasFactory<\Database\Factories\Modules\Core\Identity\Models\UserFactory> */
     use HasFactory;

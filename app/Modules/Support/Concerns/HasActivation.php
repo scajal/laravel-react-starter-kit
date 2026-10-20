@@ -51,6 +51,6 @@ trait HasActivation
     #[Scope]
     protected function isActive(Builder $query, string|bool $value = true): void
     {
-        $query->where($this->qualifyColumn('is_active'), filter_var($value, FILTER_VALIDATE_BOOLEAN));
+        $query->where($query->qualifyColumn('is_active'), filter_var($value, FILTER_VALIDATE_BOOLEAN));
     }
 }

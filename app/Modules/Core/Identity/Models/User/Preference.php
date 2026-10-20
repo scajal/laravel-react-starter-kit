@@ -29,7 +29,7 @@ use Spatie\Activitylog\Support\LogOptions;
  * @property string $value
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Core\Monitoring\Models\Activity> $activitiesAsSubject
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Modules\Audit\Models\Activity> $activitiesAsSubject
  * @property-read \App\Modules\Core\Identity\Models\User $user
  *
  * @method static \Database\Factories\Modules\Core\Identity\Models\User\PreferenceFactory factory($count = null, $state = [])
