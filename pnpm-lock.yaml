@@ -4,9 +4,19 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    vite:
+      specifier: npm:@voidzero-dev/vite-plus-core@1.3.0
+      version: 1.3.0
+    vite-plus:
+      specifier: 1.3.0
+      version: 1.3.0
+
 overrides:
   react: ^19.2.8
   react-dom: ^19.2.8
+  vite@*: npm:@voidzero-dev/vite-plus-core@1.3.0
 
 importers:
 
@@ -17,19 +27,19 @@ importers:
         version: 3.9.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@inertiajs/vite':
         specifier: ^3.9.1
-        version: 3.9.1(vite@8.3.4(jiti@2.7.0))
+        version: 3.9.1(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2))
       '@inertiaui/modal-react':
         specifier: ^3.1.2
         version: 3.1.2(@inertiajs/react@3.9.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@vitejs/plugin-react':
         specifier: ^6.1.2
-        version: 6.1.2(@rolldown/plugin-babel@0.2.4(@babel/core@8.0.7)(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(jiti@2.7.0)))(babel-plugin-react-compiler@1.0.0)(vite@8.3.4(jiti@2.7.0))
+        version: 6.1.2(@rolldown/plugin-babel@0.2.4(@babel/core@8.0.7)(@babel/runtime@7.29.10)(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2))(rolldown@1.2.14))(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2))(babel-plugin-react-compiler@1.0.0)
       laravel-react-i18n:
         specifier: ^2.0.5
         version: 2.0.5
       laravel-vite-plugin:
         specifier: ^3.2.0
-        version: 3.2.0(vite@8.3.4(jiti@2.7.0))
+        version: 3.2.0(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2))
       lodash:
         specifier: ^4.18.1
         version: 4.18.1
@@ -43,18 +53,18 @@ importers:
         specifier: ^7.0.2
         version: 7.0.2
       vite:
-        specifier: ^8.3.4
-        version: 8.3.4(jiti@2.7.0)
+        specifier: 'catalog:'
+        version: '@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2)'
     devDependencies:
       '@laravel/vite-plugin-wayfinder':
         specifier: ^0.1.11
         version: 0.1.11
       '@rolldown/plugin-babel':
         specifier: ^0.2.4
-        version: 0.2.4(@babel/core@8.0.7)(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(jiti@2.7.0))
+        version: 0.2.4(@babel/core@8.0.7)(@babel/runtime@7.29.10)(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2))(rolldown@1.2.14)
       '@tailwindcss/vite':
         specifier: ^4.3.3
-        version: 4.3.3(vite@8.3.4(jiti@2.7.0))
+        version: 4.3.3(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2))
       '@types/lodash':
         specifier: ^4.17.26
         version: 4.17.26
@@ -74,7 +84,7 @@ importers:
         specifier: ^4.3.3
         version: 4.3.3
       vite-plus:
-        specifier: ^1.3.0
+        specifier: 'catalog:'
         version: 1.3.0(@vitest/ui@5.0.5)(jiti@2.7.0)(typescript@7.0.2)
     optionalDependencies:
       '@laravel/multiplex':
@@ -1830,49 +1840,6 @@ packages:
       playwright:
         optional: true
 
-  vite@8.3.4:
-    resolution: {integrity: sha512-IftLE8phJhdNRIGNEV4JCCvfNScoZQVfcXaN8TQropWGJtOHcu+iAB9pHcuGvmEb/kddw0LBe/jS8ztdC6xdiQ==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': ^20.19.0 || >=22.12.0
-      '@vitejs/devtools': ^0.7.1
-      esbuild: ^0.27.0 || ^0.28.0
-      jiti: '>=1.21.0'
-      less: ^4.0.0
-      sass: ^1.70.0
-      sass-embedded: ^1.70.0
-      stylus: '>=0.54.8'
-      sugarss: ^5.0.0
-      terser: ^5.16.0
-      tsx: ^4.8.1
-      yaml: ^2.4.2
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      '@vitejs/devtools':
-        optional: true
-      esbuild:
-        optional: true
-      jiti:
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      sass-embedded:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-      tsx:
-        optional: true
-      yaml:
-        optional: true
-
   vitest@5.0.5:
     resolution: {integrity: sha512-cPODOMF8YnkiiYtDdHo6n4wWmBrOBBbOIYH2d33M4l3CdNn72h+qMmO6uXffUN6A5AZFXNND/d+krS9mgkXRfg==}
     engines: {node: ^22.12.0 || ^24.0.0 || >=26.0.0}
@@ -2090,13 +2057,13 @@ snapshots:
     transitivePeerDependencies:
       - axios
 
-  '@inertiajs/vite@3.9.1(vite@8.3.4(jiti@2.7.0))':
+  '@inertiajs/vite@3.9.1(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2))':
     dependencies:
       '@inertiajs/core': 3.9.1
       '@jridgewell/remapping': 2.3.5
       magic-string: 0.30.21
       tinyglobby: 0.2.17
-      vite: 8.3.4(jiti@2.7.0)
+      vite: '@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2)'
     transitivePeerDependencies:
       - axios
 
@@ -2335,14 +2302,14 @@ snapshots:
   '@rolldown/binding-win32-x64-msvc@1.2.14':
     optional: true
 
-  '@rolldown/plugin-babel@0.2.4(@babel/core@8.0.7)(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(jiti@2.7.0))':
+  '@rolldown/plugin-babel@0.2.4(@babel/core@8.0.7)(@babel/runtime@7.29.10)(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2))(rolldown@1.2.14)':
     dependencies:
       '@babel/core': 8.0.7
       picomatch: 4.0.7
       rolldown: 1.2.14
     optionalDependencies:
       '@babel/runtime': 7.29.10
-      vite: 8.3.4(jiti@2.7.0)
+      vite: '@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2)'
 
   '@rolldown/pluginutils@1.0.1': {}
 
@@ -2413,12 +2380,12 @@ snapshots:
       '@tailwindcss/oxide-win32-arm64-msvc': 4.3.3
       '@tailwindcss/oxide-win32-x64-msvc': 4.3.3
 
-  '@tailwindcss/vite@4.3.3(vite@8.3.4(jiti@2.7.0))':
+  '@tailwindcss/vite@4.3.3(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2))':
     dependencies:
       '@tailwindcss/node': 4.3.3
       '@tailwindcss/oxide': 4.3.3
       tailwindcss: 4.3.3
-      vite: 8.3.4(jiti@2.7.0)
+      vite: '@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2)'
 
   '@testing-library/dom@10.4.2':
     dependencies:
@@ -2520,12 +2487,12 @@ snapshots:
   '@typescript/typescript-win32-x64@7.0.2':
     optional: true
 
-  '@vitejs/plugin-react@6.1.2(@rolldown/plugin-babel@0.2.4(@babel/core@8.0.7)(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(jiti@2.7.0)))(babel-plugin-react-compiler@1.0.0)(vite@8.3.4(jiti@2.7.0))':
+  '@vitejs/plugin-react@6.1.2(@rolldown/plugin-babel@0.2.4(@babel/core@8.0.7)(@babel/runtime@7.29.10)(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2))(rolldown@1.2.14))(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2))(babel-plugin-react-compiler@1.0.0)':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 8.3.4(jiti@2.7.0)
+      vite: '@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2)'
     optionalDependencies:
-      '@rolldown/plugin-babel': 0.2.4(@babel/core@8.0.7)(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(jiti@2.7.0))
+      '@rolldown/plugin-babel': 0.2.4(@babel/core@8.0.7)(@babel/runtime@7.29.10)(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2))(rolldown@1.2.14)
       babel-plugin-react-compiler: 1.0.0
 
   '@vitest/browser-preview@5.0.5(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2))(vitest@5.0.5)':
@@ -2890,11 +2857,11 @@ snapshots:
       php-array-reader: 2.1.4
       react: 19.3.1
 
-  laravel-vite-plugin@3.2.0(vite@8.3.4(jiti@2.7.0)):
+  laravel-vite-plugin@3.2.0(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2)):
     dependencies:
       picocolors: 1.1.1
       tinyglobby: 0.2.17
-      vite: 8.3.4(jiti@2.7.0)
+      vite: '@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2)'
       vite-plugin-full-reload: 1.2.0
 
   lightningcss-android-arm64@1.32.0:
@@ -3336,17 +3303,6 @@ snapshots:
       - utf-8-validate
       - vue-tsc
       - yaml
-
-  vite@8.3.4(jiti@2.7.0):
-    dependencies:
-      lightningcss: 1.33.0
-      picomatch: 4.0.7
-      postcss: 8.5.31
-      rolldown: 1.2.14
-      tinyglobby: 0.2.17
-    optionalDependencies:
-      fsevents: 2.3.3
-      jiti: 2.7.0
 
   vitest@5.0.5(@vitest/browser-preview@5.0.5)(@vitest/ui@5.0.5)(@voidzero-dev/vite-plus-core@1.3.0(jiti@2.7.0)(typescript@7.0.2)):
     dependencies:
