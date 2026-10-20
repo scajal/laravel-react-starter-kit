@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Core\Identity\Enums\User;
 
+use App\Modules\Support\Concerns\AsOptions;
 use Filament\Support\Contracts\HasLabel;
 use Illuminate\Support\Facades\Cookie as CookieJar;
 use LaravelLang\Locales\Facades\Locales;
@@ -17,6 +18,8 @@ use Symfony\Component\HttpFoundation\Cookie;
  */
 enum PreferenceKey: string implements HasLabel
 {
+    use AsOptions;
+
     /**
      * Represents the colour scheme the app is painted in.
      */

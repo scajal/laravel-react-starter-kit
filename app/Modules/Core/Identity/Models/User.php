@@ -21,6 +21,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\App;
 use Relaticle\ActivityLog\Concerns\InteractsWithTimeline;
+use Relaticle\ActivityLog\Contracts\HasTimeline;
 use Relaticle\ActivityLog\Timeline\TimelineBuilder;
 use Spatie\Activitylog\Models\Concerns\CausesActivity;
 use Spatie\Activitylog\Models\Concerns\LogsActivity;
@@ -56,7 +57,7 @@ use Spatie\Activitylog\Support\LogOptions;
  */
 #[Fillable(['avatar', 'email', 'external_id', 'is_active', 'name'])]
 #[Hidden(['external_id', 'remember_token'])]
-class User extends Authenticatable implements FilamentUser, HasLocalePreference
+class User extends Authenticatable implements FilamentUser, HasLocalePreference, HasTimeline
 {
     use CausesActivity;
 
