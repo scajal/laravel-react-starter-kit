@@ -18,18 +18,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * A choice a member made about how the app looks or reads,
  * stored on their account so it follows them across devices.
  *
- * @property string $id
  * @property \App\Modules\Core\Identity\Enums\User\PreferenceKey $key
- * @property string $user_id
- * @property string $value
- * @property \Carbon\CarbonImmutable|null $created_at
- * @property \Carbon\CarbonImmutable|null $updated_at
- * @property-read \App\Modules\Core\Identity\Models\User $user
+ * @property-read \App\MOdules\Core\Identity\Models\User|null $user
  *
- * @method static \Database\Factories\Modules\Core\Identity\Models\User\PreferenceFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Modules\Core\Identity\Models\User\Preference newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Modules\Core\Identity\Models\User\Preference newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Modules\Core\Identity\Models\User\Preference query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Preference newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Preference newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Preference query()
  *
  * @mixin \Eloquent
  */
