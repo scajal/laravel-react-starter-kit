@@ -49,8 +49,11 @@ class HandleAppearance
      */
     public static function resolve(Request $request): string
     {
-        $appearance = ($user = $request->user()) instanceof User
-            ? $user->PreferenceKey(PreferenceKey::Appearance) ?? $request->cookie(PreferenceKey::Appearance->cookieName())
+        /** @var \App\Modules\Core\Identity\Models\User|null $user */
+        $user = $request->user();
+
+        $appearance = $user instanceof User
+            ? $user->preferenceKey(PreferenceKey::Appearance) ?? $request->cookie(PreferenceKey::Appearance->cookieName())
             : $request->cookie(PreferenceKey::Appearance->cookieName());
 
         return is_string($appearance) && in_array($appearance, self::APPEARANCES, true)

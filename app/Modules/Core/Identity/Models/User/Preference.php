@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * stored on their account so it follows them across devices.
  *
  * @property \App\Modules\Core\Identity\Enums\User\PreferenceKey $key
- * @property-read \App\MOdules\Core\Identity\Models\User|null $user
+ * @property-read \App\Modules\Core\Identity\Models\User|null $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Preference newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Preference newQuery()
