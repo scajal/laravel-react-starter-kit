@@ -20,6 +20,7 @@
         "spatie/laravel-query-builder": "^7.3"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.7",
         "fakerphp/faker": "^1.24",
         "larastan/larastan": "^3.9",
         "laravel/boost": "^2.10",
@@ -29,7 +30,12 @@
         "laravel/sail": "^1.53",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.9.3",
-        "phpunit/phpunit": "^12.5.23"
+        "pestphp/pest": "^5.3",
+        "pestphp/pest-plugin-arch": "^5.0",
+        "pestphp/pest-plugin-laravel": "^5.0",
+        "pestphp/pest-plugin-phpstan": "^5.2",
+        "pestphp/pest-plugin-type-coverage": "^5.0",
+        "rector/rector": "^2.7"
     },
     "autoload": {
         "psr-4": {
@@ -44,56 +50,79 @@
         }
     },
     "scripts": {
-        "setup": [
-            "composer install",
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "@php artisan key:generate",
-            "@php artisan migrate --force",
-            "npm install",
-            "npm run build"
+        "ci:check": [
+            "Composer\\Config::disableProcessTimeout",
+            "pnpm run check",
+            "pnpm run types:check",
+            "@test"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "@php artisan dev"
         ],
         "lint": [
-            "pint --parallel"
+            "@rector",
+            "@pint",
+            "@types"
         ],
         "lint:check": [
-            "pint --parallel --test"
+            "@rector --dry-run",
+            "@types",
+            "@pint --test"
         ],
-        "ci:check": [
-            "Composer\\Config::disableProcessTimeout",
-            "npm run check",
-            "npm run types:check",
-            "@test"
-        ],
-        "types:check": [
-            "phpstan analyse"
-        ],
-        "test": [
-            "@php artisan config:clear --ansi",
-            "@lint:check",
-            "@types:check",
-            "@php artisan test"
+        "pint": [
+            "pint --parallel"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan boost:update --ansi",
+            "@php artisan ide-helper:generate"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "rector": [
+            "rector"
+        ],
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --force",
+            "pnpm install --frozen-lockfile",
+            "pnpm run build"
+        ],
+        "test": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php artisan config:clear --ansi",
+            "@lint:check",
+            "@php artisan test --parallel"
+        ],
+        "test:coverage": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php vendor/bin/pest --coverage --min=100 --parallel"
+        ],
+        "test:types": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php vendor/bin/pest --type-coverage --min=100 --parallel"
+        ],
+        "types": [
+            "Composer\\Config::disableProcessTimeout",
+            "phpstan analyse --memory-limit=1G"
         ]
     },
     "extra": {
