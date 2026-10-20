@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Modules\Core\Identity\Enums\Team;
 
-use App\Modules\Support\Concerns\AsOptions;
 use Filament\Support\Contracts\HasLabel;
 
 /**
@@ -15,8 +14,6 @@ use Filament\Support\Contracts\HasLabel;
  */
 enum Permission: string implements HasLabel
 {
-    use AsOptions;
-
     /**
      * Get the label for the permission.
      */
