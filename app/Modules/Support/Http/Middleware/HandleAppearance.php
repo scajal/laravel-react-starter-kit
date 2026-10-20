@@ -46,6 +46,8 @@ class HandleAppearance
      * Resolve the colour scheme from the signed-in member's stored
      * choice, then from the unencrypted cookie the client writes,
      * falling back to the device's own PreferenceKey.
+     *
+     * @return 'light' | 'dark' | 'system'
      */
     public static function resolve(Request $request): string
     {
