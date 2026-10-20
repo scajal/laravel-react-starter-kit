@@ -41,7 +41,7 @@ return [
      * It should implement the Spatie\Activitylog\Contracts\Activity interface
      * and extend Illuminate\Database\Eloquent\Model.
      */
-    'activity_model' => \App\Modules\Audit\Models\Activity::class,
+    'activity_model' => \App\Modules\Core\Audit\Models\Activity::class,
 
     /*
      * These attributes will be excluded from logging for all models.
