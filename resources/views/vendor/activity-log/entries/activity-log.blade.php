@@ -1,6 +1,6 @@
 @php
     use Relaticle\ActivityLog\Support\ActivityLogOperation;
-    use App\Modules\Support\ActivityLogSummary;
+    use App\Modules\Core\Audit\Support\ActivityLogSummary;
 
     $summary = ActivityLogSummary::from($entry);
     $icon = 'heroicon-o-pencil';

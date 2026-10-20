@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Administration\Providers;
 
 use BezhanSalleh\LanguageSwitch\LanguageSwitch;
+use CodeWithDennis\FilamentLucideIcons\Enums\LucideIcon;
 use Filament\Actions;
 use Filament\Panel;
 use Filament\Support\Assets\Css;
@@ -12,7 +13,6 @@ use Filament\Support\Colors\Color;
 use Filament\Support\Components;
 use Filament\Support\Enums\IconPosition;
 use Filament\Support\Enums\Width;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use LaravelLang\Locales\Facades\Locales;
 
@@ -34,7 +34,7 @@ abstract class PanelProvider extends \Filament\PanelProvider
     {
         Actions\ActionGroup::configureUsing(
             fn (Actions\ActionGroup $group): Actions\ActionGroup => $group
-                ->icon(Heroicon::EllipsisHorizontal)
+                ->icon(LucideIcon::Ellipsis)
                 ->iconPosition(IconPosition::After)
                 ->color(Color::Zinc)
         );
@@ -43,7 +43,7 @@ abstract class PanelProvider extends \Filament\PanelProvider
             fn (Actions\BulkActionGroup $group): Actions\BulkActionGroup => $group
                 ->button()
                 ->label(trans('Actions'))
-                ->icon(Heroicon::OutlinedChevronDown)
+                ->icon(LucideIcon::ChevronDown)
                 ->iconPosition(IconPosition::After)
         );
 

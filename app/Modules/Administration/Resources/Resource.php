@@ -4,30 +4,10 @@ declare(strict_types=1);
 
 namespace App\Modules\Administration\Resources;
 
-use BackedEnum;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Str;
 
 abstract class Resource extends \Filament\Resources\Resource
 {
-    /**
-     * Get the resource's active navigation icon.
-     */
-    #[\Override]
-    public static function getActiveNavigationIcon(): string|BackedEnum|Htmlable|null
-    {
-        if (($icon = static::getNavigationIcon()) === null) {
-            return null;
-        }
-
-        /** @disregard P1006 */
-        return Str::replace('o-', 'heroicon-s-', match (true) { // @phpstan-ignore-line
-            ($icon = static::getNavigationIcon()) instanceof BackedEnum => $icon->value,
-            $icon instanceof Htmlable => $icon->toHtml(),
-            default => $icon,
-        });
-    }
-
     /**
      * Get the resource model's label.
      */
