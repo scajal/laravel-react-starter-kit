@@ -1,0 +1,6 @@
+@import "../../../vendor/filament/filament/resources/css/theme.css";
+
+@source "../../../app/Modules/Administration/Panels/Administration/**/*";
+@source "../../../resources/views/administration/**/*";
+@source '../../../../vendor/bezhansalleh/filament-language-switch/**/*';
+@source '../../../vendor/relaticle/activity-log/resources/views/**/*';
