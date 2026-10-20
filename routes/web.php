@@ -1,5 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+/*
+|--------------------------------------------------------------------------
+| Authentication routes
+|--------------------------------------------------------------------------
+|
+| This file contains the routes for the authentication module.
+|
+*/
 
-Route::inertia('/', 'welcome');
+require __DIR__.'/../app/Modules/Authentication/Routes/web.php';
