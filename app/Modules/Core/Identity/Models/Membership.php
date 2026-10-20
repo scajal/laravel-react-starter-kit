@@ -42,7 +42,7 @@ use Spatie\Activitylog\Support\LogOptions;
 #[Table('memberships')]
 class Membership extends Pivot implements HasTimeline
 {
-    /** @use \App\Modules\Support\Concerns\Models\DefinesKeyType<string> */
+    /** @use \App\Modules\Support\Concerns\DefinesKeyType<string> */
     use DefinesKeyType;
 
     /** @use \Illuminate\Database\Eloquent\Factories\HasFactory<\Database\Factories\Modules\Core\Identity\Models\MembershipFactory> */

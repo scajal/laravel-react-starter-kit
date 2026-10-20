@@ -145,17 +145,6 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
     }
 
     /**
-     * Get the user's membership of the given team, or null when
-     * they do not belong to it.
-     */
-    public function membershipIn(Team $team): ?Membership
-    {
-        return $this->memberships()
-            ->whereBelongsTo($team)
-            ->first();
-    }
-
-    /**
      * Get the user's memberships, one per organization they belong to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Modules\Core\Identity\Models\Membership, $this>
@@ -210,11 +199,22 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
     }
 
     /**
+     * Get the user's membership of the given team, or null when
+     * they do not belong to it.
+     */
+    public function teamMembership(Team $team): ?Membership
+    {
+        return $this->memberships()
+            ->whereBelongsTo($team)
+            ->first();
+    }
+
+    /**
      * Get the user's role on the given team.
      */
-    public function roleIn(Team $team): ?Role
+    public function teamRole(Team $team): ?Role
     {
-        return $this->membershipIn($team)?->role;
+        return $this->teamMembership($team)?->role;
     }
 
     /**

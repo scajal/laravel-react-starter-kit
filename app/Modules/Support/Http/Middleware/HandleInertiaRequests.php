@@ -2,6 +2,7 @@
 
 namespace App\Modules\Support\Http\Middleware;
 
+use App\Modules\Core\Identity\Http\Middleware\HandleAppearance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Inertia\Middleware;

@@ -110,7 +110,7 @@ abstract class PanelProvider extends \Filament\PanelProvider
                 \Illuminate\Routing\Middleware\SubstituteBindings::class,
                 \Filament\Http\Middleware\DisableBladeIconComponents::class,
                 \Filament\Http\Middleware\DispatchServingFilamentEvent::class,
-                \App\Modules\Support\Http\Middleware\SetLocale::class,
+                \App\Modules\Core\Identity\Http\Middleware\SetLocale::class,
             ])
             ->sidebarFullyCollapsibleOnDesktop()
             ->spa()
