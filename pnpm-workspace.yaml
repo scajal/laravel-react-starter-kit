@@ -5,5 +5,10 @@ overrides:
 packages:
     - "."
 
+peerDependencyRules:
+    allowedVersions:
+        "vitest>vite": "1.3.0"
+        "@vitest/mocker>vite": "1.3.0"
+
 publicHoistPattern:
     - "@inertiajs/core"
