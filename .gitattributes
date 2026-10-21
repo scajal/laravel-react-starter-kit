@@ -7,7 +7,6 @@
 *.php diff=php
 
 CHANGELOG.md export-ignore
-README.md export-ignore
-.github/workflows/browser-tests.yml export-ignore
+.github/workflows/release.yml export-ignore
 
 resources/js/types/generated/** linguist-generated=true

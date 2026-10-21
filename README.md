@@ -10,7 +10,7 @@ Authentication, teams, an admin panel, audit logs, i18n and a strict quality too
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Use this template](https://img.shields.io/badge/use%20this-template-2ea44f?logo=github)](https://github.com/scajal/laravel-react-starter-kit/generate)
 
-![PHP](https://img.shields.io/badge/PHP-8.3%2B-777BB4?logo=php&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.4%2B-777BB4?logo=php&logoColor=white)
 ![Laravel](https://img.shields.io/badge/Laravel-13-FF2D20?logo=laravel&logoColor=white)
 ![Inertia](https://img.shields.io/badge/Inertia-3-9553E9?logo=inertia&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
@@ -65,7 +65,7 @@ Authentication, teams, an admin panel, audit logs, i18n and a strict quality too
 
 **Backend**
 
-- 🐘 [PHP 8.3+](https://www.php.net) & [Laravel 13](https://laravel.com)
+- 🐘 [PHP 8.4+](https://www.php.net) & [Laravel 13](https://laravel.com)
 - 🔌 [Inertia.js 3](https://inertiajs.com) (server adapter)
 - 🛡️ [Filament 5](https://filamentphp.com) with Lucide icons & a language switcher
 - 🔐 [Laravel WorkOS](https://github.com/laravel/workos)
@@ -180,29 +180,48 @@ Pages receive [laravel-data](https://spatie.be/docs/laravel-data) objects, and `
 
 ### 📋 Prerequisites
 
-- **PHP 8.3+** with the SQLite extension
+- **PHP 8.4+** with the SQLite extension
 - **Composer 2**
 - **Node.js 22+** and **pnpm**
+- The **[Laravel installer](https://laravel.com/docs/installation#installing-php)** (optional, but recommended)
 - A free **[WorkOS](https://workos.com)** account
 
 ### 1️⃣ Create your project
 
-Click **[Use this template](https://github.com/scajal/laravel-react-starter-kit/generate)** on GitHub, or clone it directly:
+With the Laravel installer:
+
+```bash
+laravel new my-app --using=scajal/laravel-react-starter-kit --pnpm
+cd my-app
+```
+
+This creates `.env`, generates the app key, creates the SQLite database, runs the migrations, and installs and builds the frontend with pnpm.
+
+<details>
+<summary>Other ways to create a project</summary>
+
+**With Composer:**
+
+```bash
+composer create-project scajal/laravel-react-starter-kit my-app
+cd my-app
+pnpm install
+pnpm run build
+```
+
+**From the GitHub template:** click **[Use this template](https://github.com/scajal/laravel-react-starter-kit/generate)**, or clone the repository, then install everything with one command:
 
 ```bash
 git clone https://github.com/scajal/laravel-react-starter-kit.git my-app
 cd my-app
-```
-
-### 2️⃣ Install everything
-
-One command installs PHP and JS dependencies, creates `.env`, generates the app key, creates the SQLite database, runs migrations and builds the assets:
-
-```bash
 composer setup
 ```
 
-### 3️⃣ Configure WorkOS
+</details>
+
+### 2️⃣ After installing: configure WorkOS
+
+The app signs users in through WorkOS, so it needs your WorkOS keys before anyone can log in.
 
 1. In the [WorkOS dashboard](https://dashboard.workos.com), open **Authentication → AuthKit** and enable it.
 2. Under **Redirects**, set:
@@ -217,7 +236,7 @@ WORKOS_API_KEY=sk_test_...
 WORKOS_REDIRECT_URL="${APP_URL}/authenticate"
 ```
 
-### 4️⃣ Start developing
+### 3️⃣ Start developing
 
 ```bash
 composer dev

@@ -2,10 +2,31 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "scajal/laravel-react-starter-kit",
     "type": "project",
-    "description": "An opinionated starter kit for the Laravel framework.",
+    "description": "An opinionated, production-minded starter kit for building SaaS apps with Laravel, Inertia and React.",
+    "keywords": [
+        "laravel",
+        "starter-kit",
+        "inertia",
+        "react",
+        "typescript",
+        "filament",
+        "workos",
+        "saas"
+    ],
+    "homepage": "https://github.com/scajal/laravel-react-starter-kit",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Santiago Cajal",
+            "homepage": "https://github.com/scajal"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/scajal/laravel-react-starter-kit/issues",
+        "source": "https://github.com/scajal/laravel-react-starter-kit"
+    },
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "bezhansalleh/filament-language-switch": "^5.0",
         "codewithdennis/filament-lucide-icons": "^4.1",
         "filament/filament": "^5.10",
