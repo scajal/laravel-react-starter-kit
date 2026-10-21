@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Core\Identity\Http\Middleware;
 
+use App\Modules\Core\Identity\Enums\User\Appearance;
 use App\Modules\Core\Identity\Enums\User\PreferenceKey;
 use App\Modules\Core\Identity\Models\User;
 use Closure;
@@ -37,7 +38,8 @@ class HandleAppearance
             $this->synchronize($request, $user);
         }
 
-        View::share('appearance', self::resolve($request));
+        // Share the resolved appearance.
+        View::share('appearance', self::resolve($request)->value);
 
         return $next($request);
     }
@@ -46,10 +48,8 @@ class HandleAppearance
      * Resolve the colour scheme from the signed-in member's stored
      * choice, then from the unencrypted cookie the client writes,
      * falling back to the device's own PreferenceKey.
-     *
-     * @return 'light' | 'dark' | 'system'
      */
-    public static function resolve(Request $request): string
+    public static function resolve(Request $request): Appearance
     {
         /** @var \App\Modules\Core\Identity\Models\User|null $user */
         $user = $request->user();
@@ -59,8 +59,8 @@ class HandleAppearance
             : $request->cookie(PreferenceKey::Appearance->cookieName());
 
         return is_string($appearance) && in_array($appearance, self::APPEARANCES, true)
-            ? $appearance
-            : 'system';
+            ? Appearance::from($appearance)
+            : Appearance::System;
     }
 
     /**

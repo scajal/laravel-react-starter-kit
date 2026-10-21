@@ -1,4 +1,4 @@
-import type { SharedData } from "@/types/generated/App/Modules/Support/Http/Data";
+import type { InertiaSharedData } from "@/types/generated/App/Modules/Support/Data";
 
 declare module "react" {
     interface InputHTMLAttributes<T> {
@@ -8,7 +8,7 @@ declare module "react" {
 
 declare module "@inertiajs/core" {
     export interface InertiaConfig {
-        sharedPageProps: SharedData & {
+        sharedPageProps: InertiaSharedData & {
             [key: string]: unknown;
         };
     }

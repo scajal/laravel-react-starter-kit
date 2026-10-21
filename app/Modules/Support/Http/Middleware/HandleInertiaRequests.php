@@ -2,6 +2,9 @@
 
 namespace App\Modules\Support\Http\Middleware;
 
+use App\Modules\Core\Identity\Data\TeamData;
+use App\Modules\Core\Identity\Data\UserData;
+use App\Modules\Core\Identity\Enums\User\Appearance;
 use App\Modules\Core\Identity\Http\Middleware\HandleAppearance;
 use Filament\Facades\Filament;
 use Illuminate\Http\Request;
@@ -52,21 +55,24 @@ class HandleInertiaRequests extends Middleware
             // client writes, so the server renders the right one on the
             // first paint instead of flashing. "system" leaves the
             // choice to the device.
-            'appearance' => fn (): string => HandleAppearance::resolve($request),
+            'appearance' => fn (): Appearance => HandleAppearance::resolve($request),
 
             // Indicate the permissions that the user has,
             // including the ones in the current team.
             'authorization' => fn (): array => [
-                'canAccessAdministration' => $user?->canAccessPanel(Filament::getPanel('administration')),
+                'canAccessAdministration' => (bool) $user?->canAccessPanel(Filament::getPanel('administration')),
                 'teamPermissions' => $user?->currentTeam ? $user->teamRole($user->currentTeam)?->permissions() ?? [] : [],
             ],
+
+            // The team the user is working in.
+            'current_team' => fn (): ?TeamData => TeamData::optional($user?->currentTeam),
 
             // The resolved locale, read at render time so it
             // works for SSR requests too.
             'locale' => fn (): string => App::currentLocale(),
 
             // The authenticated user.
-            'user' => Inertia::always($user),
+            'user' => Inertia::always(fn (): ?UserData => UserData::optional($user)),
         ];
     }
 }

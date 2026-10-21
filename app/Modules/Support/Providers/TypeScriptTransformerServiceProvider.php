@@ -7,6 +7,7 @@ namespace App\Modules\Support\Providers;
 use Spatie\LaravelTypeScriptTransformer\LaravelData\LaravelDataTypeScriptTransformerExtension;
 use Spatie\LaravelTypeScriptTransformer\TypeScriptTransformerApplicationServiceProvider;
 use Spatie\TypeScriptTransformer\Transformers\AttributedClassTransformer;
+use Spatie\TypeScriptTransformer\Transformers\EnumTransformer;
 use Spatie\TypeScriptTransformer\TypeScriptTransformerConfigFactory;
 use Spatie\TypeScriptTransformer\Writers\ModuleWriter;
 
@@ -26,6 +27,7 @@ class TypeScriptTransformerServiceProvider extends TypeScriptTransformerApplicat
     {
         $config
             ->transformer(AttributedClassTransformer::class)
+            ->transformer(EnumTransformer::class)
             ->extension(new LaravelDataTypeScriptTransformerExtension)
             ->transformDirectories(app_path('Modules'))
             ->outputDirectory(resource_path('js/types/generated'))
