@@ -1,2 +1,2 @@
-export type Permission = "*";
-export type Role = "admin" | "member" | "owner";
+export type Permission = '*';
+export type Role = 'admin' | 'member' | 'owner';

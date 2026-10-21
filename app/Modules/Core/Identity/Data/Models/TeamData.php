@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Modules\Core\Identity\Data;
+namespace App\Modules\Core\Identity\Data\Models;
+
+use App\Modules\Core\Identity\Models\Team;
 
 class TeamData extends \Spatie\LaravelData\Data
 {
@@ -28,4 +30,17 @@ class TeamData extends \Spatie\LaravelData\Data
          */
         public string $slug,
     ) {}
+
+    /**
+     * Create a data's instance from the provided model.
+     */
+    public static function fromModel(Team $team): self
+    {
+        return new self(
+            id: $team->getKey(),
+            isActive: $team->is_active,
+            name: $team->name,
+            slug: $team->slug,
+        );
+    }
 }

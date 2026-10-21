@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Modules\Core\Identity\Data;
+namespace App\Modules\Core\Identity\Data\Models;
+
+use App\Modules\Core\Identity\Models\User;
 
 class UserData extends \Spatie\LaravelData\Data
 {
@@ -33,4 +35,18 @@ class UserData extends \Spatie\LaravelData\Data
          */
         public string $name,
     ) {}
+
+    /**
+     * Create a data's instance from the provided model.
+     */
+    public static function fromModel(User $user): self
+    {
+        return new self(
+            id: $user->getKey(),
+            avatar: $user->avatar,
+            email: $user->email,
+            isActive: $user->is_active,
+            name: $user->name,
+        );
+    }
 }
