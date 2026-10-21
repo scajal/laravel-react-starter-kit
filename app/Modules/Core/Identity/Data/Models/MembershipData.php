@@ -39,7 +39,7 @@ class MembershipData extends \Spatie\LaravelData\Data
     public static function fromModel(Membership $membership): self
     {
         return new self(
-            id: $membership->getKey(), // @phpstan-ignore-line argument.type Keys are always strings.
+            id: $membership->getKey(), // @phpstan-ignore argument.type (Keys are always strings.)
             role: $membership->role,
             team: Lazy::whenLoaded('team', $membership, fn (): TeamData => TeamData::from($membership->team)),
             user: Lazy::whenLoaded('user', $membership, fn (): UserData => UserData::from($membership->user)),

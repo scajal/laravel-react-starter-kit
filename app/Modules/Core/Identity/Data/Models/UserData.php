@@ -42,7 +42,7 @@ class UserData extends \Spatie\LaravelData\Data
     public static function fromModel(User $user): self
     {
         return new self(
-            id: $user->getKey(), // @phpstan-ignore-line argument.type Keys are always strings.
+            id: $user->getKey(), // @phpstan-ignore argument.type (Keys are always strings.)
             avatar: $user->avatar,
             email: $user->email,
             isActive: $user->is_active,

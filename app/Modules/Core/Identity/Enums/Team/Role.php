@@ -56,7 +56,7 @@ enum Role: string implements HasLabel
      */
     public function grants(Permission $permission): bool
     {
-        return in_array($permission, $this->permissions(), true);
+        return $permission === Permission::Wildcard ? true : in_array($permission, $this->permissions(), true); // @phpstan-ignore identical.alwaysTrue (Remove after a new permission is added.)
     }
 
     /**

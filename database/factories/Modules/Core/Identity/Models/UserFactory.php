@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Factories\Modules\Core\Identity\Models;
 
+use App\Modules\Core\Identity\Enums\Team\Role;
+use App\Modules\Core\Identity\Models\Team;
 use App\Modules\Core\Identity\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -30,7 +32,16 @@ class UserFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (User $user): void { // @phpstan-ignore return.type
-            //
+            /** @var \App\Modules\Core\Identity\Models\Team $team */
+            $team = Team::factory()->create([
+                'name' => $user->name."'s Team",
+            ]);
+
+            $team->users()->attach($user, [
+                'role' => Role::Owner->value,
+            ]);
+
+            $user->switchTeam($team);
         });
     }
 

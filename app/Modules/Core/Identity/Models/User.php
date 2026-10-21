@@ -173,15 +173,13 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
 
     /**
      * Get the value the user stored for the given preference, or
-     * null when they never chose one.
+     * null when they never chose one. The preferences are loaded
+     * once, so the middleware reading them on every request
+     * shares one query.
      */
     public function preference(PreferenceKey $key): ?string
     {
-        $value = $this->preferences()
-            ->where('key', $key)
-            ->value('value');
-
-        return is_string($value) ? $value : null;
+        return $this->preferences->firstWhere('key', $key)?->value;
     }
 
     /**
@@ -204,14 +202,19 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
 
     /**
      * Store the given value for the preference, replacing the one
-     * the user chose before.
+     * the user chose before. The loaded preferences are dropped,
+     * so the next read sees the new value.
      */
     public function rememberPreference(PreferenceKey $key, string $value): Preference
     {
-        return $this->preferences()->updateOrCreate(
+        $preference = $this->preferences()->updateOrCreate(
             ['key' => $key],
             ['value' => $value],
         );
+
+        $this->unsetRelation('preferences');
+
+        return $preference;
     }
 
     /**

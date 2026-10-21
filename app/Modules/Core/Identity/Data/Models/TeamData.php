@@ -37,7 +37,7 @@ class TeamData extends \Spatie\LaravelData\Data
     public static function fromModel(Team $team): self
     {
         return new self(
-            id: $team->getKey(), // @phpstan-ignore-line argument.type Keys are always strings.
+            id: $team->getKey(), // @phpstan-ignore argument.type (Keys are always strings.)
             isActive: $team->is_active,
             name: $team->name,
             slug: $team->slug,

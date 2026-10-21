@@ -61,8 +61,8 @@ class HandleInertiaRequests extends Middleware
             // Indicate the permissions that the user has,
             // including the ones in the current team.
             'authorization' => fn (): array => [
-                'canAccessAdministration' => (bool) $user?->canAccessPanel(Filament::getPanel('administration')),
-                'teamPermissions' => $user?->currentTeam ? $user->teamRole($user->currentTeam)?->permissions() ?? [] : [],
+                'can_access_administration' => (bool) $user?->canAccessPanel(Filament::getPanel('administration')),
+                'team_permissions' => $user?->currentTeam ? $user->teamRole($user->currentTeam)?->permissions() ?? [] : [],
             ],
 
             // The team the user is working in.
