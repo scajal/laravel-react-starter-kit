@@ -51,6 +51,7 @@ Authentication, teams, an admin panel, audit logs, i18n and a strict quality too
 | 🌍 | **Internationalization** | English 🇬🇧 and Spanish 🇪🇸 out of the box, shared between Laravel and React. Only the active language's dictionary is downloaded. |
 | 🌗 | **Light / dark / system themes** | The chosen appearance and locale are stored on the user's account and synced through cookies, so there's no flash of the wrong theme and preferences follow users across devices. |
 | ⚡ | **SSR & React Compiler** | Server-side rendering through `@inertiajs/vite` and automatic memoization with the React Compiler. |
+| 🧬 | **End-to-end types** | Every prop is a [laravel-data](https://spatie.be/docs/laravel-data) object, and [TypeScript Transformer](https://spatie.be/docs/typescript-transformer) generates its exact TypeScript type, enums included. A test fails CI when the generated types drift. |
 | 🧭 | **Type-safe routing** | [Wayfinder](https://github.com/laravel/wayfinder) generates TypeScript functions for your Laravel routes and controllers, so you never hardcode URLs again. |
 | 🪟 | **Modals as routes** | [Inertia Modal](https://inertiaui.com/inertia-modal) opens any route in a modal or slideover, with deep-linkable URLs. |
 | 🎨 | **shadcn/ui ready** | Tailwind CSS 4, Base UI, Lucide icons and a pre-configured `components.json`. Run `pnpm dlx shadcn add button` and go. |
@@ -70,6 +71,7 @@ Authentication, teams, an admin panel, audit logs, i18n and a strict quality too
 - 🔐 [Laravel WorkOS](https://github.com/laravel/workos)
 - 📜 [spatie/laravel-activitylog](https://github.com/spatie/laravel-activitylog) + [relaticle/activity-log](https://github.com/relaticle/activity-log) timelines
 - 🔎 [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder)
+- 🧬 [spatie/laravel-data](https://github.com/spatie/laravel-data) + [laravel-typescript-transformer](https://github.com/spatie/laravel-typescript-transformer)
 - 🌍 [Laravel Lang](https://laravel-lang.com)
 
 **Frontend**
@@ -162,7 +164,15 @@ Factories and tests mirror the same structure, so finding the test for any class
 
 ### 🔄 Shared Inertia props
 
-Every page receives `user`, `locale`, `appearance` and an `authorization` object (admin access plus the current team's permissions) via `HandleInertiaRequests`, fully typed on the React side.
+Every page receives `user`, `current_team`, `locale`, `appearance` and an `authorization` object (admin access plus the current team's permissions). They are declared once, as the properties of `SharedData`, and `HandleInertiaRequests` shares one prop per property.
+
+### 🧬 Typed props
+
+Pages receive [laravel-data](https://spatie.be/docs/laravel-data) objects, and `php artisan typescript:transform` generates their TypeScript types into `resources/js/types/generated`, one module per PHP namespace:
+
+- Each page gets a `*Props` data class under its module's `Http/Pages`, mirroring its file in `resources/js/pages`.
+- A shape only one page uses lives next to that page's props; it moves to the module's `Http/Data` once a second page needs it.
+- Keys are snake_case on the wire, like the rest of Laravel.
 
 ---
 
@@ -241,6 +251,7 @@ SQLite is the default for zero-config local development. To switch to MySQL or P
 | `pnpm run build:ssr` | 🖥️ Production build with the SSR bundle |
 | `pnpm run check` / `check:fix` | 💅 Lint and format the frontend with Vite+ |
 | `pnpm run types:check` | 🟦 Type-check TypeScript |
+| `php artisan typescript:transform` | 🧬 Regenerate the TypeScript types of the data objects and enums |
 
 ---
 

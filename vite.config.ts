@@ -40,6 +40,7 @@ export default defineConfig({
             "resources/js/actions/**",
             "resources/js/routes/**",
             "resources/js/wayfinder/**",
+            "resources/js/types/generated/**",
         ],
         sortTailwindcss: {
             functions: ["cn", "cva"],
@@ -69,6 +70,7 @@ export default defineConfig({
             "resources/js/actions/**",
             "resources/js/routes/**",
             "resources/js/wayfinder/**",
+            "resources/js/types/generated/**",
         ],
         options: {
             denyWarnings: true,

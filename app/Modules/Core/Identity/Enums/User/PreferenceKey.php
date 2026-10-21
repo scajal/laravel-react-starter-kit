@@ -83,7 +83,7 @@ enum PreferenceKey: string implements HasLabel
     public function values(): array
     {
         return match ($this) {
-            self::Appearance => ['light', 'dark', 'system'],
+            self::Appearance => array_column(Appearance::cases(), 'value'),
             self::Locale => self::installedLocales(),
         };
     }

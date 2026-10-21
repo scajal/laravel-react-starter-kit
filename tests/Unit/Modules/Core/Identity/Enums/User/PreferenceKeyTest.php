@@ -17,7 +17,7 @@ test('each preference has a translated label', function (PreferenceKey $key, str
 ]);
 
 test('the appearance accepts the colour schemes the menus offer', function (): void {
-    expect(PreferenceKey::Appearance->values())->toBe(['light', 'dark', 'system']);
+    expect(PreferenceKey::Appearance->values())->toBe(['dark', 'light', 'system']);
 });
 
 test('the locale accepts the installed locales', function (): void {
