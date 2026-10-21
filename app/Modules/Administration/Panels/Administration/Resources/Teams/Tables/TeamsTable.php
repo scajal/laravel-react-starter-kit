@@ -44,7 +44,7 @@ class TeamsTable
     /**
      * Get the table columns.
      *
-     * @return array<int, \Filament\Tables\Columns\TextColumn>
+     * @return array<int, \Filament\Tables\Filters\BaseFilter>
      */
     protected static function getFilters(): array
     {

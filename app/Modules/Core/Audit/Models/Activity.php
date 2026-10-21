@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Modules\Core\Audit\Models\Activity causedBy(\Illuminate\Database\Eloquent\Model $causer)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Modules\Core\Audit\Models\Activity forEvent(\Spatie\Activitylog\Enums\ActivityEvent|string $event)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Modules\Core\Audit\Models\Activity forSubject(\Illuminate\Database\Eloquent\Model $subject)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Modules\Core\Audit\Models\Activity inLog(array<array-key, string>|string ...$logNames)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Modules\Core\Audit\Models\Activity inLog(\BackedEnum|array<array-key, string>|string ...$logNames)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Modules\Core\Audit\Models\Activity newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Modules\Core\Audit\Models\Activity newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Modules\Core\Audit\Models\Activity query()

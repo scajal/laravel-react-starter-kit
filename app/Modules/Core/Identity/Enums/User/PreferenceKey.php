@@ -34,7 +34,7 @@ enum PreferenceKey: string implements HasLabel
      * Indicate if the given value is one the preference
      * accepts.
      *
-     * @phpstan-assert-if-true string $value
+     * @phpstan-assert-if-true =string $value
      */
     public function accepts(mixed $value): bool
     {
