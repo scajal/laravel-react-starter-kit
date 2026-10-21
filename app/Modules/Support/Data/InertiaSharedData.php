@@ -5,8 +5,8 @@ namespace App\Modules\Support\Data;
 use App\Modules\Core\Identity\Data\Models\TeamData;
 use App\Modules\Core\Identity\Data\Models\UserData;
 use App\Modules\Core\Identity\Enums\User\Appearance;
+use App\Modules\Core\Identity\Enums\User\Locale;
 use App\Modules\Core\Identity\Models\Team;
-use Spatie\TypeScriptTransformer\Attributes\LiteralTypeScriptType;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 /**
@@ -20,7 +20,6 @@ abstract class InertiaSharedData extends \Spatie\LaravelData\Data
      * Create a new class instance.
      *
      * @param  array{canAccessAdministration: bool, teamPermissions: array<int, \App\Modules\Core\Identity\Enums\Team\Permission>}  $authorization
-     * @param  'en' | 'es'  $locale
      */
     public function __construct(
         /**
@@ -46,8 +45,7 @@ abstract class InertiaSharedData extends \Spatie\LaravelData\Data
          * The resolved locale, read at render time so it
          * works for SSR requests too.
          */
-        #[LiteralTypeScriptType(("'en' | 'es'"))]
-        public string $locale,
+        public Locale $locale,
 
         /**
          * The authenticated user.

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Modules\Core\Identity\Http\Middleware;
 
+use App\Modules\Core\Identity\Enums\User\Locale;
 use App\Modules\Core\Identity\Enums\User\PreferenceKey;
 use App\Modules\Core\Identity\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
-use LaravelLang\Locales\Facades\Locales;
 use Symfony\Component\HttpFoundation\Response;
 
 class SetLocale
@@ -115,7 +115,7 @@ class SetLocale
     protected function locales(): array
     {
         /** @var array<int, string> */
-        $locales = Locales::installed()->pluck('code')->toArray();
+        $locales = array_column(Locale::cases(), 'value');
 
         return $locales;
     }

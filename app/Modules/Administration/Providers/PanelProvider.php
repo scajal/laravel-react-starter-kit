@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Administration\Providers;
 
+use App\Modules\Core\Identity\Enums\User\Locale;
 use App\Modules\Core\Identity\Enums\User\PreferenceKey;
 use App\Modules\Core\Identity\Models\User;
 use BezhanSalleh\LanguageSwitch\Events\LocaleChanged;
@@ -19,7 +20,6 @@ use Filament\Support\Enums\Width;
 use Filament\Tables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
-use LaravelLang\Locales\Facades\Locales;
 
 abstract class PanelProvider extends \Filament\PanelProvider
 {
@@ -82,7 +82,7 @@ abstract class PanelProvider extends \Filament\PanelProvider
     {
         LanguageSwitch::configureUsing(
             fn (LanguageSwitch $plugin): LanguageSwitch => $plugin->locales(
-                Locales::installed()->pluck('code')->toArray()
+                array_column(Locale::cases(), 'value')
             )->userPreferredLocale(fn (): array|string|null => request()->cookie('filament_language_switch_locale'))
         );
 

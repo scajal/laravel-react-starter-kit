@@ -1,8 +1,9 @@
 {
     "App\/Modules\/Core\/Identity\/Data\/Models\/index.ts": "b20e88551386b7002df9ac81a07b1e47",
+    "App\/Modules\/Core\/Identity\/Data\/Models\/User\/index.ts": "6633e61b657ecd7af43e2aa0b9f97c29",
     "App\/Modules\/Core\/Identity\/Enums\/Team\/index.ts": "014647ce77fc4e5bb0de4b8186a1fa4e",
-    "App\/Modules\/Core\/Identity\/Enums\/User\/index.ts": "6c7089adf62709c763c0e509b8676e8e",
-    "App\/Modules\/Support\/Data\/index.ts": "04b023399cca8bf9dbe954bb9c9c6dd0",
+    "App\/Modules\/Core\/Identity\/Enums\/User\/index.ts": "f87b62a793d5c32e008488b2395eef11",
+    "App\/Modules\/Support\/Data\/index.ts": "d9cae0a0d2315fd3cb71c952e4703d62",
     "Illuminate\/index.ts": "c49cb82ab295a835fb8553e262cc508a",
     "Spatie\/LaravelData\/index.ts": "101e5c5ea9c44b7f18ad04a3c0b31fdb"
 }

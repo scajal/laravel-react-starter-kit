@@ -84,20 +84,7 @@ enum PreferenceKey: string implements HasLabel
     {
         return match ($this) {
             self::Appearance => array_column(Appearance::cases(), 'value'),
-            self::Locale => self::installedLocales(),
+            self::Locale => array_column(Locale::cases(), 'value'),
         };
-    }
-
-    /**
-     * Get the codes of the locales the app is translated into.
-     *
-     * @return array<int, string>
-     */
-    private static function installedLocales(): array
-    {
-        /** @var array<int, string> $locales */
-        $locales = Locales::installed()->pluck('code')->all();
-
-        return $locales;
     }
 }

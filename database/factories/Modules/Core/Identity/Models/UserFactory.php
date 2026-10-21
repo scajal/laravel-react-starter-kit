@@ -42,12 +42,13 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
+            'avatar' => null,
             new User()->currentTeam()->getForeignKeyName() => null,
-            'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => CarbonImmutable::now(),
             'external_id' => 'user_'.Str::ulid(),
             'is_active' => true,
+            'name' => fake()->name(),
             'remember_token' => Str::random(10),
         ];
     }

@@ -5,6 +5,7 @@ namespace App\Modules\Support\Http\Middleware;
 use App\Modules\Core\Identity\Data\Models\TeamData;
 use App\Modules\Core\Identity\Data\Models\UserData;
 use App\Modules\Core\Identity\Enums\User\Appearance;
+use App\Modules\Core\Identity\Enums\User\Locale;
 use App\Modules\Core\Identity\Http\Middleware\HandleAppearance;
 use Filament\Facades\Filament;
 use Illuminate\Http\Request;
@@ -69,7 +70,7 @@ class HandleInertiaRequests extends Middleware
 
             // The resolved locale, read at render time so it
             // works for SSR requests too.
-            'locale' => fn (): string => App::currentLocale(),
+            'locale' => fn (): Locale => Locale::from(App::currentLocale()),
 
             // The authenticated user.
             'user' => Inertia::always(fn (): ?UserData => UserData::optional($user)),
