@@ -18,7 +18,7 @@ Authentication, teams, an admin panel, audit logs, i18n and a strict quality too
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
 ![Filament](https://img.shields.io/badge/Filament-5-FDAE4B?logo=laravel&logoColor=white)
 ![Pest](https://img.shields.io/badge/tested_with-Pest-F472B6)
-![PHPStan](https://img.shields.io/badge/PHPStan-level%207-4F5B93)
+![PHPStan](https://img.shields.io/badge/PHPStan-level%20max-4F5B93)
 
 </div>
 
@@ -53,10 +53,10 @@ Authentication, teams, an admin panel, audit logs, i18n and a strict quality too
 | ⚡ | **SSR & React Compiler** | Server-side rendering through `@inertiajs/vite` and automatic memoization with the React Compiler. |
 | 🧭 | **Type-safe routing** | [Wayfinder](https://github.com/laravel/wayfinder) generates TypeScript functions for your Laravel routes and controllers, so you never hardcode URLs again. |
 | 🪟 | **Modals as routes** | [Inertia Modal](https://inertiaui.com/inertia-modal) opens any route in a modal or slideover, with deep-linkable URLs. |
-| 🎨 | **shadcn/ui ready** | Tailwind CSS 4, Radix UI, Lucide icons and a pre-configured `components.json`. Run `pnpm dlx shadcn add button` and go. |
+| 🎨 | **shadcn/ui ready** | Tailwind CSS 4, Base UI, Lucide icons and a pre-configured `components.json`. Run `pnpm dlx shadcn add button` and go. |
 | 🧰 | **Sensible defaults** | [Essentials](https://github.com/nunomaduro/essentials) turns on strict models, immutable dates, auto eager loading, stray-request prevention and no destructive commands in production. |
 | 🆔 | **ULID primary keys** | Non-sequential, sortable IDs on every model. |
-| ✅ | **Strict quality gates** | Pest 5, PHPStan level 7, Rector, Pint, Vite+ lint/format and TypeScript checks, all running in GitHub Actions. |
+| ✅ | **Strict quality gates** | Pest 5, PHPStan at max level, Rector, Pint, Vite+ lint/format and TypeScript checks, all running in GitHub Actions. |
 
 ---
 
@@ -76,7 +76,7 @@ Authentication, teams, an admin panel, audit logs, i18n and a strict quality too
 
 - ⚛️ [React 19](https://react.dev) + [React Compiler](https://react.dev/learn/react-compiler)
 - 🟦 [TypeScript 7](https://www.typescriptlang.org)
-- 🎨 [Tailwind CSS 4](https://tailwindcss.com), [Radix UI](https://www.radix-ui.com) & [shadcn/ui](https://ui.shadcn.com)
+- 🎨 [Tailwind CSS 4](https://tailwindcss.com), [Base UI](https://base-ui.com) & [shadcn/ui](https://ui.shadcn.com)
 - ⚡ [Vite+](https://viteplus.dev) for building, linting and formatting
 - 🧭 [Wayfinder](https://github.com/laravel/wayfinder) for typed routes
 - 🌐 [laravel-react-i18n](https://github.com/EugeneMeles/laravel-react-i18n)
@@ -84,7 +84,7 @@ Authentication, teams, an admin panel, audit logs, i18n and a strict quality too
 **Tooling**
 
 - 🧪 [Pest 5](https://pestphp.com) with arch, type-coverage and PHPStan plugins
-- 🔬 [Larastan](https://github.com/larastan/larastan) (level 7) & [Rector](https://getrector.com)
+- 🔬 [Larastan](https://github.com/larastan/larastan) (max level) & [Rector](https://getrector.com)
 - 💅 [Laravel Pint](https://laravel.com/docs/pint)
 - 🤖 [Laravel Boost](https://github.com/laravel/boost) MCP server and agent skills
 - 🐛 [Laravel Pail](https://github.com/laravel/pail) and IDE Helper
@@ -249,7 +249,7 @@ SQLite is the default for zero-config local development. To switch to MySQL or P
 The kit treats quality as a feature:
 
 - ✅ **Pest 5** feature and unit tests for every module
-- 🔬 **PHPStan level 7** via Larastan across `app`, `config`, `database` and `routes`
+- 🔬 **PHPStan at max level** via Larastan across `app`, `config`, `database` and `routes`
 - ♻️ **Rector** for automated refactors and modern PHP syntax
 - 💅 **Pint** for consistent PHP style
 - 🧹 **Vite+** linting with type-aware rules (warnings fail the build) and formatting with sorted imports and Tailwind classes

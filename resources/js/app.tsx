@@ -22,7 +22,7 @@ putConfig({ navigate: true });
  * Executed whenever a flash message is provided from
  * the server.
  */
-router.on("flash", (event) => {
+router.on("flash", () => {
     // @todo: Implement after shadcn's toast component
     // is installed.
 });
@@ -47,21 +47,13 @@ void createInertiaApp({
      * app root (inside PageContext) on first paint, enabling direct modal URL visits.
      */
     setup({ el, App, props }) {
-        const locale =
-            (props.initialPage.props.locale as string | undefined) ?? "en";
+        const locale = (props.initialPage.props.locale as string | undefined) ?? "en";
 
         // Create the app to render.
         const app = (
             <StrictMode>
-                <I18nProvider
-                    locale={locale}
-                    fallbackLocale="en"
-                    files={translations}
-                >
-                    {renderApp(
-                        App as unknown as Parameters<typeof renderApp>[0],
-                        props as ModalPageProps,
-                    )}
+                <I18nProvider locale={locale} fallbackLocale="en" files={translations}>
+                    {renderApp(App as unknown as Parameters<typeof renderApp>[0], props as ModalPageProps)}
                 </I18nProvider>
             </StrictMode>
         );

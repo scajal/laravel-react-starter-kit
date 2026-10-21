@@ -1,7 +1,3 @@
 export default function Welcome() {
-    return (
-        <div className="h-dvh w-wvh flex justify-center items-center">
-            Hello, world!
-        </div>
-    );
+    return <div className="w-wvh flex h-dvh items-center justify-center">Hello, world!</div>;
 }

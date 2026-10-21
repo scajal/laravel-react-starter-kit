@@ -1,4 +1,5 @@
 import type { Auth } from "@/types/auth";
+
 import { SharedInertiaProps } from "./modules/shared/inertia-shared";
 
 declare module "react" {

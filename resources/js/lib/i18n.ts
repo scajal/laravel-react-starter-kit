@@ -21,9 +21,7 @@ export const translations: Record<string, unknown> = {};
  * Fetch the dictionaries at the given paths into `translations`.
  */
 const load = async (paths: Array<string>): Promise<void> => {
-    const loaded = await Promise.all(
-        paths.map(async (path) => [path, await dictionaries[path]()] as const),
-    );
+    const loaded = await Promise.all(paths.map(async (path) => [path, await dictionaries[path]()] as const));
 
     for (const [path, dictionary] of loaded) {
         translations[path] = dictionary;
@@ -43,9 +41,7 @@ export const loadInitialDictionaries = async (): Promise<void> =>
     load(
         import.meta.env.SSR
             ? Object.keys(dictionaries)
-            : [
-                  pathFor(document.documentElement.lang.split("-")[0] || "en"),
-              ].filter((path) => path in dictionaries),
+            : [pathFor(document.documentElement.lang.split("-")[0] || "en")].filter((path) => path in dictionaries),
     );
 
 /**
