@@ -4,6 +4,8 @@ All notable changes to this starter kit are documented here. The format follows 
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-21
+
 ### Added
 
 - Sign-in through WorkOS AuthKit, with inactive users signed out automatically.
@@ -17,4 +19,5 @@ All notable changes to this starter kit are documented here. The format follows 
 - Type-safe routes through Wayfinder.
 - Installation through the Laravel installer: `laravel new my-app --using=scajal/laravel-react-starter-kit`.
 
-[Unreleased]: https://github.com/scajal/laravel-react-starter-kit/commits/main
+[Unreleased]: https://github.com/scajal/laravel-react-starter-kit/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/scajal/laravel-react-starter-kit/releases/tag/v0.1.0

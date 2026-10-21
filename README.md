@@ -340,7 +340,7 @@ tests/
 - [ ] 🏠 **Home page**: replace the placeholder `welcome` page with a real dashboard.
 - [ ] 🔔 **Flash toasts**: show server flash messages with shadcn's toast component.
 - [ ] 👥 **Team onboarding**: send users who belong to no team to a team-creation page after signing in.
-- [ ] 🔑 **Team permissions**: the `Permission` enum ships empty, ready for you to declare the actions your roles grant.
+- [ ] 🔑 **Team permissions**: the `Permission` enum ships with a single `Wildcard` case that only owners hold, ready for you to declare the actions your roles grant.
 
 ---
 
