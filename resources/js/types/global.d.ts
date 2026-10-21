@@ -1,6 +1,4 @@
-import type { Auth } from "@/types/auth";
-
-import { SharedInertiaProps } from "./modules/shared/inertia-shared";
+import type { SharedInertiaProps } from "@/types/modules/support/http/middleware/handle-inertia-requests";
 
 declare module "react" {
     interface InputHTMLAttributes<T> {
