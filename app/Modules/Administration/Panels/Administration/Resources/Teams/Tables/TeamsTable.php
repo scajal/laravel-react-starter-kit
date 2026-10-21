@@ -19,6 +19,7 @@ class TeamsTable
     {
         return $table
             ->columns(self::getColumns())
+            ->filters(self::getFilters())
             ->recordActions(self::getRecordActions());
     }
 
@@ -37,6 +38,19 @@ class TeamsTable
                 ->formatStateUsing(fn (bool $state): string => $state ? trans('Active') : trans('Inactive'))
                 ->color(fn (bool $state): array => $state ? Color::Green : Color::Red)
                 ->badge(),
+        ];
+    }
+
+    /**
+     * Get the table columns.
+     *
+     * @return array<int, \Filament\Tables\Columns\TextColumn>
+     */
+    protected static function getFilters(): array
+    {
+        return [
+            Tables\Filters\TernaryFilter::make('is_active')
+                ->native(false),
         ];
     }
 

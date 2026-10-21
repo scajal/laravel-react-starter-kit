@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Administration\Providers;
 
+use App\Modules\Core\Identity\Enums\User\PreferenceKey;
+use App\Modules\Core\Identity\Models\User;
+use BezhanSalleh\LanguageSwitch\Events\LocaleChanged;
 use BezhanSalleh\LanguageSwitch\LanguageSwitch;
 use CodeWithDennis\FilamentLucideIcons\Enums\LucideIcon;
 use Filament\Actions;
@@ -14,6 +17,8 @@ use Filament\Support\Components;
 use Filament\Support\Enums\IconPosition;
 use Filament\Support\Enums\Width;
 use Filament\Tables;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use LaravelLang\Locales\Facades\Locales;
 
 abstract class PanelProvider extends \Filament\PanelProvider
@@ -80,6 +85,16 @@ abstract class PanelProvider extends \Filament\PanelProvider
                 Locales::installed()->pluck('code')->toArray()
             )->userPreferredLocale(fn (): array|string|null => request()->cookie('filament_language_switch_locale'))
         );
+
+        // The member's stored locale wins over the session, so the
+        // one chosen in the switch is stored to take effect.
+        Event::listen(function (LocaleChanged $event): void {
+            $user = Auth::user();
+
+            if ($user instanceof User && PreferenceKey::Locale->accepts($event->locale)) {
+                $user->rememberPreference(PreferenceKey::Locale, $event->locale);
+            }
+        });
     }
 
     /**

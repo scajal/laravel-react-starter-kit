@@ -125,4 +125,13 @@ class MembersRelationManager extends RelationManager
             ]),
         ];
     }
+
+    /**
+     * Indicate if the relation manager is read-only.
+     */
+    #[\Override]
+    public function isReadOnly(): bool
+    {
+        return false;
+    }
 }
