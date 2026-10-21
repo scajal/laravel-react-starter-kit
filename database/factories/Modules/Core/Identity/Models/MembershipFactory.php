@@ -31,8 +31,8 @@ class MembershipFactory extends Factory
     {
         return [
             'role' => Role::Member->value,
-            new Membership()->team()->getForeignKey() => Team::factory(),
-            new Membership()->user()->getForeignKey() => User::factory(),
+            new Membership()->team->getForeignKey() => Team::factory(),
+            new Membership()->user->getForeignKey() => User::factory(),
         ];
     }
 
