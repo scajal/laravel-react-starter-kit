@@ -32,16 +32,7 @@ class UserFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (User $user): void { // @phpstan-ignore return.type
-            /** @var \App\Modules\Core\Identity\Models\Team $team */
-            $team = Team::factory()->create([
-                'name' => $user->name."'s Team",
-            ]);
-
-            $team->users()->attach($user, [
-                'role' => Role::Owner->value,
-            ]);
-
-            $user->switchTeam($team);
+            //
         });
     }
 
@@ -82,5 +73,25 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes): array => [
             'email_verified_at' => null,
         ]);
+    }
+
+    /**
+     * Indicate that the user owns a team of their own and
+     * is working in it.
+     */
+    public function withPersonalTeam(): static
+    {
+        return $this->afterCreating(function (User $user): void {
+            /** @var \App\Modules\Core\Identity\Models\Team $team */
+            $team = Team::factory()->create([
+                'name' => $user->name."'s Team",
+            ]);
+
+            $team->users()->attach($user, [
+                'role' => Role::Owner->value,
+            ]);
+
+            $user->switchTeam($team);
+        });
     }
 }

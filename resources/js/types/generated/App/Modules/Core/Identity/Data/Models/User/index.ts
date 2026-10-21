@@ -1,5 +1,5 @@
-import { Appearance, Locale } from "../../../Enums/User";
+import { Appearance, Locale } from '../../../Enums/User';
 export type PreferenceData = {
-    appearance: Appearance;
-    locale: Locale;
+appearance: Appearance,
+locale: Locale,
 };
