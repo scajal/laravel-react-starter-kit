@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Modules\Administration\Panels\Administration\Resources\Users\Tables;
 
-use App\Modules\Core\Identity\Models\User;
-use CodeWithDennis\FilamentLucideIcons\Enums\LucideIcon;
 use Filament\Actions;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\FontWeight;
@@ -55,22 +53,6 @@ class UsersTable
             Actions\ActionGroup::make([
                 Actions\ActionGroup::make([
                     Actions\ViewAction::make(),
-                ])->dropdown(false),
-                Actions\ActionGroup::make([
-                    Actions\Action::make('activate')
-                        ->action(fn (User $record): bool => $record->activate())
-                        ->visible(fn (User $record): bool => ! $record->is_active)
-                        ->successNotificationTitle(trans('Saved'))
-                        ->requiresConfirmation()
-                        ->icon(LucideIcon::Check)
-                        ->color(Color::Green),
-                    Actions\Action::make('deactivate')
-                        ->action(fn (User $record): bool => $record->deactivate())
-                        ->visible(fn (User $record): bool => $record->is_active)
-                        ->successNotificationTitle(trans('Saved'))
-                        ->requiresConfirmation()
-                        ->icon(LucideIcon::X)
-                        ->color(Color::Red),
                 ])->dropdown(false),
             ]),
         ];

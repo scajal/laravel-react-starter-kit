@@ -19,11 +19,13 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
 use Relaticle\ActivityLog\Concerns\InteractsWithTimeline;
 use Relaticle\ActivityLog\Contracts\HasTimeline;
 use Relaticle\ActivityLog\Timeline\TimelineBuilder;
@@ -109,6 +111,16 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
     }
 
     /**
+     * Get the user's current team.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Modules\Core\Identity\Models\Team, $this>
+     */
+    public function currentTeam(): BelongsTo
+    {
+        return $this->belongsTo(Team::class, $this->getCurrentTeamForeignKey());
+    }
+
+    /**
      * Get the activity log options for the user.
      */
     public function getActivitylogOptions(): LogOptions
@@ -147,7 +159,15 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
     }
 
     /**
-     * Get the user's memberships, one per organization they belong to.
+     * Determine if the given team is the user's current team.
+     */
+    public function isCurrentTeam(Team $team): bool
+    {
+        return $team->is($this->currentTeam);
+    }
+
+    /**
+     * Get the user's memberships, one per team they belong to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Modules\Core\Identity\Models\Membership, $this>
      */
@@ -201,6 +221,26 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
     }
 
     /**
+     * Switch to the given team.
+     */
+    public function switchTeam(Team $team): bool
+    {
+        if (! $this->belongsToTeam($team)) {
+            return false;
+        }
+
+        // Update the user's current team and persist it.
+        $this->currentTeam()
+            ->associate($team)
+            ->save();
+
+        // Set the default URL parameters for team-based routes.
+        URL::defaults(['team' => $team->slug]);
+
+        return true;
+    }
+
+    /**
      * Get the user's membership of the given team, or null when
      * they do not belong to it.
      */
@@ -220,7 +260,7 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
     }
 
     /**
-     * Get the organizations the user belongs to.
+     * Get the teams the user belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Modules\Core\Identity\Models\Team, $this, \App\Modules\Core\Identity\Models\Membership, 'membership'>
      */
