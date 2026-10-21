@@ -21,8 +21,7 @@ class TeamFactory extends Factory
     protected $model = Team::class;
 
     /**
-     * Define the model's default state: no Sereno allowance and no model,
-     * like every organization until a platform admin sets them.
+     * Define the model's default state.
      *
      * @return array<string, mixed>
      */

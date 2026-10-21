@@ -193,8 +193,7 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
     }
 
     /**
-     * Get the locale mail and notifications to the user are
-     * rendered in: the one they stored, or English.
+     * Get the preferred locale of the user.
      */
     public function preferredLocale(): string
     {

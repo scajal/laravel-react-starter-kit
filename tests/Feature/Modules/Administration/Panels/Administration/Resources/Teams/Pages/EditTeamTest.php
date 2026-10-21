@@ -19,6 +19,32 @@ it('renames a team and derives its new slug', function (): void {
     $this->assertDatabaseHas(Team::class, ['id' => $team->id, 'name' => 'Globex', 'slug' => 'globex']);
 });
 
+it('derives the slug from the name when it is cleared', function (): void {
+    /** @var \Tests\TestCase $this */
+    asUser();
+    $team = Team::factory()->create(['name' => 'Acme', 'slug' => 'acme-hq']);
+
+    $page = Livewire::test(EditTeam::class, ['record' => $team->getRouteKey()])
+        ->fillForm(['slug' => null])
+        ->call('save');
+
+    $page->assertHasNoFormErrors()->assertNotified();
+    $this->assertDatabaseHas(Team::class, ['id' => $team->id, 'slug' => 'acme']);
+});
+
+it('keeps the slug given along with a new name', function (): void {
+    /** @var \Tests\TestCase $this */
+    asUser();
+    $team = Team::factory()->create(['name' => 'Acme', 'slug' => 'acme']);
+
+    $page = Livewire::test(EditTeam::class, ['record' => $team->getRouteKey()])
+        ->fillForm(['name' => 'Globex', 'slug' => 'globex-hq'])
+        ->call('save');
+
+    $page->assertHasNoFormErrors();
+    $this->assertDatabaseHas(Team::class, ['id' => $team->id, 'name' => 'Globex', 'slug' => 'globex-hq']);
+});
+
 it('saves a team that keeps its own slug', function (): void {
     asUser();
     $team = Team::factory()->create(['slug' => 'acme']);

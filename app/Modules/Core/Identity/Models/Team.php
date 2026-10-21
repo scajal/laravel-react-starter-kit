@@ -76,9 +76,11 @@ class Team extends Model implements HasTimeline
         // Callback executed when a team is
         // being updated.
         static::updating(function (self $team): void {
-            if ($team->isDirty('name')) {
-                $team->slug = Str::lower(self::generateSlug($team->name, $team->getKey())); // @phpstan-ignore-line argument.type Key is always string.
+            if (blank($team->slug) || ($team->isDirty('name') && ! $team->isDirty('slug'))) {
+                $team->slug = self::generateSlug($team->name, $team->getKey());
             }
+
+            $team->slug = Str::lower($team->slug);
         });
     }
 

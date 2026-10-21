@@ -60,6 +60,25 @@ it('keeps its own slug when renamed to a name that derives the same slug', funct
     expect($team->slug)->toBe('acme');
 });
 
+it('derives the slug again when it is cleared', function (?string $slug): void {
+    $team = Team::factory()->create(['name' => 'Acme', 'slug' => 'acme-hq']);
+
+    $team->update(['slug' => $slug]);
+
+    expect($team->fresh()?->slug)->toBe('acme');
+})->with([
+    'null' => [null],
+    'an empty string' => [''],
+]);
+
+it('keeps a slug given along with a new name', function (): void {
+    $team = Team::factory()->create(['name' => 'Acme', 'slug' => 'acme']);
+
+    $team->update(['name' => 'Globex', 'slug' => 'Globex-HQ']);
+
+    expect($team->fresh()?->slug)->toBe('globex-hq');
+});
+
 it('keeps the slug when the name does not change', function (): void {
     $team = Team::factory()->create(['name' => 'Acme', 'slug' => 'acme-hq']);
 
@@ -81,6 +100,14 @@ it('lists its members with the role each one holds', function (): void {
         $owner->id => Role::Owner,
         $member->id => Role::Member,
     ]);
+});
+
+it('lists only its own memberships', function (): void {
+    $team = Team::factory()->create();
+    $membership = Membership::factory()->for($team)->create();
+    Membership::factory()->create();
+
+    expect($team->memberships()->get()->modelKeys())->toBe([$membership->id]);
 });
 
 it('logs only the attributes that changed', function (): void {

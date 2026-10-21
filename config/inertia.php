@@ -18,12 +18,11 @@ return [
     */
 
     'ssr' => [
-        // Only the public docs are server-rendered; the Documentation
-        // module's service provider turns SSR off for every other route.
         'enabled' => (bool) env('INERTIA_SSR_ENABLED', true),
-        'url' => env('INERTIA_SSR_URL', 'http://127.0.0.1:13714'),
-        'bundle' => base_path('bootstrap/ssr/app.js'),
 
+        'url' => env('INERTIA_SSR_URL', 'http://127.0.0.1:13714'),
+
+        'bundle' => base_path('bootstrap/ssr/app.js'),
     ],
 
     /*

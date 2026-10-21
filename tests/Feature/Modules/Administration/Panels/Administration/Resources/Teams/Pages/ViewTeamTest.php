@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Modules\Administration\Panels\Administration\Resources\Teams\Pages\ViewTeam;
 use App\Modules\Administration\Panels\Administration\Resources\Teams\RelationManagers\MembersRelationManager;
 use App\Modules\Core\Identity\Models\Team;
+use App\Modules\Core\Identity\Models\User;
 use Livewire\Livewire;
 
 it('shows the team with its members', function (): void {
@@ -43,12 +44,12 @@ it('activates an inactive team', function (): void {
 });
 
 it('shows the activity log of the team', function (): void {
-    asUser();
+    asUser(User::factory()->create(['name' => 'Ada Lovelace']));
     $team = Team::factory()->create(['name' => 'Acme']);
     $team->update(['name' => 'Globex']);
 
     $page = Livewire::test(ViewTeam::class, ['record' => $team->getRouteKey()])
         ->mountAction('activityLog');
 
-    $page->assertMountedActionModalSee(['System', 'changed', '2 attributes']);
+    $page->assertMountedActionModalSee(['Ada Lovelace', '2 attributes', 'Acme', 'Globex']);
 });

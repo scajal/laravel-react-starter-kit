@@ -22,14 +22,26 @@ it('uses the locale in the route segment', function (): void {
         ->assertSessionHas('locale', 'es');
 });
 
-it('ignores a locale that is not installed', function (): void {
+it('skips a route segment locale that is not installed', function (): void {
     /** @var \Tests\TestCase $this */
-    $response = $this->get('/_test/locale/fr');
+    $response = $this->withUnencryptedCookie('filament_language_switch_locale', 'es')
+        ->get('/_test/locale/fr');
 
     $response->assertOk()
-        ->assertContent('en')
-        ->assertCookieMissing('filament_language_switch_locale')
-        ->assertSessionMissing('locale');
+        ->assertContent('es')
+        ->assertSessionHas('locale', 'es');
+});
+
+it('skips a stored locale that is no longer installed', function (): void {
+    /** @var \Tests\TestCase $this */
+    $user = User::factory()->create();
+    Preference::factory()->for($user)->locale('fr')->create();
+
+    $response = $this->actingAs($user)
+        ->withUnencryptedCookie('filament_language_switch_locale', 'es')
+        ->get('/_test/locale');
+
+    $response->assertOk()->assertContent('es');
 });
 
 it('uses the stored locale of a member over the cookie', function (): void {
@@ -86,6 +98,26 @@ it('uses the preferred language of the browser', function (): void {
     /** @var \Tests\TestCase $this */
     $response = $this->withHeader('Accept-Language', 'es-ES,es;q=0.9,en;q=0.8')
         ->get('/_test/locale');
+
+    $response->assertOk()
+        ->assertContent('es')
+        ->assertCookie('filament_language_switch_locale', 'es', encrypted: false);
+});
+
+it('uses the preferred language of the browser over a cookie locale that is not installed', function (): void {
+    /** @var \Tests\TestCase $this */
+    $response = $this->withUnencryptedCookie('filament_language_switch_locale', 'fr')
+        ->withHeader('Accept-Language', 'es')
+        ->get('/_test/locale');
+
+    $response->assertOk()->assertContent('es');
+});
+
+it('falls back to the default locale of the application', function (): void {
+    /** @var \Tests\TestCase $this */
+    config(['app.locale' => 'es']);
+
+    $response = $this->get('/_test/locale');
 
     $response->assertOk()
         ->assertContent('es')
