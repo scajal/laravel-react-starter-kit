@@ -10,6 +10,7 @@
         "dev": "vp dev",
         "check": "vp check",
         "check:fix": "vp check --fix",
+        "lint": "vp lint -A all -D no-unused-vars --fix-suggestions",
         "types:check": "tsc --noEmit"
     },
     "dependencies": {
