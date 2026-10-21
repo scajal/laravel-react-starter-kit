@@ -25,3 +25,11 @@ test('the owner is granted every permission', function (): void {
 test('administrators and members are granted no permissions yet', function (Role $role): void {
     expect($role->permissions())->toBe([]);
 })->with([Role::Administrator, Role::Member]);
+
+test('only the owner is granted the wildcard permission', function (Role $role, bool $isGranted): void {
+    expect($role->grants(Permission::Wildcard))->toBe($isGranted);
+})->with([
+    'owner' => [Role::Owner, true],
+    'administrator' => [Role::Administrator, false],
+    'member' => [Role::Member, false],
+]);

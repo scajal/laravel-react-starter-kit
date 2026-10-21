@@ -145,8 +145,6 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
 
     /**
      * Determine if the user has the given permission on the team.
-     *
-     * @codeCoverageIgnore Unreachable until the Permission enum declares its first case.
      */
     public function hasTeamPermission(Team $team, Permission $permission): bool
     {

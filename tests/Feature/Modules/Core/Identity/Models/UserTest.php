@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Modules\Core\Audit\Models\Activity;
+use App\Modules\Core\Identity\Enums\Team\Permission;
 use App\Modules\Core\Identity\Enums\Team\Role;
 use App\Modules\Core\Identity\Enums\User\PreferenceKey;
 use App\Modules\Core\Identity\Models\Membership;
@@ -49,6 +50,24 @@ it('has no membership or role on a team it does not belong to', function (): voi
 
     expect($user->teamMembership($team))->toBeNull()
         ->and($user->teamRole($team))->toBeNull();
+});
+
+it('has the permissions its role grants on a team', function (): void {
+    $user = User::factory()->create();
+    $team = Team::factory()->create();
+    Membership::factory()->owner()->for($user)->for($team)->create();
+
+    expect($user->hasTeamPermission($team, Permission::Wildcard))->toBeTrue();
+});
+
+it('has no permission on a team it does not belong to', function (): void {
+    $user = User::factory()->create();
+    $ownTeam = Team::factory()->create();
+    $otherTeam = Team::factory()->create();
+    Membership::factory()->owner()->for($user)->for($ownTeam)->create();
+    $user->switchTeam($ownTeam);
+
+    expect($user->hasTeamPermission($otherTeam, Permission::Wildcard))->toBeFalse();
 });
 
 it('switches to a team it belongs to', function (): void {

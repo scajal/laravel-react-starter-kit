@@ -25,11 +25,6 @@ enum Permission: string implements HasLabel
 
     /**
      * Get the label for the permission.
-     *
-     * @codeCoverageIgnore Unreachable until the Permission enum declares its first case.
-     */
-    /**
-     * Get the label for the role.
      */
     public function getLabel(): string
     {
