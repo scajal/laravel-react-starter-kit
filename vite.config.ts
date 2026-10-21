@@ -40,7 +40,6 @@ export default defineConfig({
             "resources/js/actions/**",
             "resources/js/routes/**",
             "resources/js/wayfinder/**",
-            "resources/js/types/generated/**",
         ],
         sortTailwindcss: {
             functions: ["cn", "cva"],
@@ -70,7 +69,6 @@ export default defineConfig({
             "resources/js/actions/**",
             "resources/js/routes/**",
             "resources/js/wayfinder/**",
-            "resources/js/types/generated/**",
         ],
         options: {
             denyWarnings: true,
@@ -91,7 +89,11 @@ export default defineConfig({
         // same droplet is its one client (Inertia binds 0.0.0.0 by default).
         inertia({ ssr: { host: "127.0.0.1" } }),
         laravel({
-            input: ["resources/css/app.css", "resources/js/app.tsx", "resources/css/administration/theme.css"],
+            input: [
+                "resources/css/app.css",
+                "resources/js/app.tsx",
+                "resources/css/administration/theme.css",
+            ],
             ssr: "resources/js/app.tsx",
             refresh: true,
         }),

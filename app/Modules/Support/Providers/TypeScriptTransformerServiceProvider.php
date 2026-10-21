@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Support\TypeScript;
+namespace App\Modules\Support\Providers;
 
-use App\Modules\Support\TypeScript\Transformers\EnumTransformer;
 use Spatie\LaravelTypeScriptTransformer\LaravelData\LaravelDataTypeScriptTransformerExtension;
 use Spatie\LaravelTypeScriptTransformer\TypeScriptTransformerApplicationServiceProvider;
 use Spatie\TypeScriptTransformer\Transformers\AttributedClassTransformer;
@@ -26,14 +25,10 @@ class TypeScriptTransformerServiceProvider extends TypeScriptTransformerApplicat
     protected function configure(TypeScriptTransformerConfigFactory $config): void
     {
         $config
-            // The attributed class transformer must be registered before the
-            // data extension, which swaps it for its Laravel flavour.
             ->transformer(AttributedClassTransformer::class)
-            ->transformer(EnumTransformer::class)
             ->extension(new LaravelDataTypeScriptTransformerExtension)
             ->transformDirectories(app_path('Modules'))
             ->outputDirectory(resource_path('js/types/generated'))
-            // One module per PHP namespace, e.g. `App/Modules/Core/Identity/Http/Data/index.ts`.
             ->writer(new ModuleWriter(path: null));
     }
 }

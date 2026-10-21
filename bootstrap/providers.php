@@ -5,6 +5,6 @@ return [
 
     // The TypeScript transformer is a development dependency.
     ...class_exists(\Spatie\LaravelTypeScriptTransformer\TypeScriptTransformerApplicationServiceProvider::class)
-        ? [\App\Modules\Support\TypeScript\TypeScriptTransformerServiceProvider::class]
+        ? [\App\Modules\Support\Providers\TypeScriptTransformerServiceProvider::class]
         : [],
 ];

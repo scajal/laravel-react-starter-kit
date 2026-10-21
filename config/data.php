@@ -6,7 +6,7 @@ return [
      * is an array, it will try to convert from the first format that works,
      * and will serialize dates using the first format from the array.
      */
-    'date_format' => DATE_ATOM,
+    'date_format' => [DATE_ATOM, 'Y-m-d H:i:s'],
 
     /*
      * When transforming or casting dates, the following timezone will be used to
@@ -140,7 +140,7 @@ return [
      * When using an invalid include, exclude, only or except partial, the package will
      * throw an exception. You can disable this behaviour by setting this option to true.
      */
-    'ignore_invalid_partials' => false,
+    'ignore_invalid_partials' => true,
 
     /*
      * When transforming a nested chain of data objects, the package can end up in an infinite
@@ -192,6 +192,6 @@ return [
      * properties when used in a Livewire component.
      */
     'livewire' => [
-        'enable_synths' => false,
+        'enable_synths' => true,
     ],
 ];

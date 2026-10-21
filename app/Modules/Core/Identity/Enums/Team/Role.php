@@ -67,9 +67,7 @@ enum Role: string implements HasLabel
     public function permissions(): array
     {
         return match ($this) {
-            // The owner may do everything.
-            self::Owner => Permission::cases(),
-            default => [],
+            default => Permission::cases(),
         };
     }
 }
