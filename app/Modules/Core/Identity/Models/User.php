@@ -82,6 +82,13 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
     use Notifiable;
 
     /**
+     * The default attributes of the model.
+     */
+    protected $attributes = [
+        'avatar' => null,
+    ];
+
+    /**
      * Determine if the user belongs to the given team.
      */
     public function belongsToTeam(Team $team): bool

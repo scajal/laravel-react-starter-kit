@@ -58,7 +58,8 @@ it('shares the team the member is working in', function (): void {
 
     $response->assertOk()->assertInertia(fn (AssertableInertia $page): AssertableInertia => $page
         ->where('current_team.id', $team->id)
-        ->where('current_team.slug', $team->slug));
+        ->where('current_team.slug', $team->slug)
+        ->where('authorization.team_permissions', ['*']));
 });
 
 it('shares no team when the member is not working in one', function (): void {
