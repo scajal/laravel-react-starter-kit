@@ -25,27 +25,29 @@ class EditTeam extends EditRecord
     {
         return [
             Actions\ActionGroup::make([
-                Actions\Action::make('activate')
-                    ->action(fn (Team $record): bool => $record->activate())
-                    ->visible(fn (Team $record): bool => ! $record->is_active)
-                    ->successNotificationTitle(trans('Saved'))
-                    ->requiresConfirmation()
-                    ->icon(LucideIcon::Check)
-                    ->color(Color::Green),
-                Actions\Action::make('deactivate')
-                    ->action(fn (Team $record): bool => $record->deactivate())
-                    ->visible(fn (Team $record): bool => $record->is_active)
-                    ->successNotificationTitle(trans('Saved'))
-                    ->requiresConfirmation()
-                    ->icon(LucideIcon::X)
-                    ->color(Color::Red),
-            ])->dropdown(false),
-            Actions\ActionGroup::make([
-                Actions\ViewAction::make(),
-            ])->dropdown(false),
-            Actions\ActionGroup::make([
-                \Relaticle\ActivityLog\Filament\Actions\ActivityLogAction::make(),
-            ])->dropdown(false),
+                Actions\ActionGroup::make([
+                    Actions\Action::make('activate')
+                        ->action(fn (Team $record): bool => $record->activate())
+                        ->visible(fn (Team $record): bool => ! $record->is_active)
+                        ->successNotificationTitle(trans('Saved'))
+                        ->requiresConfirmation()
+                        ->icon(LucideIcon::Check)
+                        ->color(Color::Green),
+                    Actions\Action::make('deactivate')
+                        ->action(fn (Team $record): bool => $record->deactivate())
+                        ->visible(fn (Team $record): bool => $record->is_active)
+                        ->successNotificationTitle(trans('Saved'))
+                        ->requiresConfirmation()
+                        ->icon(LucideIcon::X)
+                        ->color(Color::Red),
+                ])->dropdown(false),
+                Actions\ActionGroup::make([
+                    Actions\ViewAction::make(),
+                ])->dropdown(false),
+                Actions\ActionGroup::make([
+                    \Relaticle\ActivityLog\Filament\Actions\ActivityLogAction::make(),
+                ])->dropdown(false),
+            ]),
         ];
     }
 }
