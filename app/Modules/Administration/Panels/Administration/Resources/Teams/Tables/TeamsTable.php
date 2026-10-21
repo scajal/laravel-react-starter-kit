@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Administration\Panels\Administration\Resources\Teams\Tables;
 
 use Filament\Actions;
+use Filament\Support\Colors\Color;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -32,6 +33,10 @@ class TeamsTable
             Tables\Columns\TextColumn::make('name')
                 ->weight(FontWeight::Medium)
                 ->searchable(isIndividual: true),
+            Tables\Columns\TextColumn::make('is_active')
+                ->formatStateUsing(fn (bool $state): string => $state ? trans('Active') : trans('Inactive'))
+                ->color(fn (bool $state): array => $state ? Color::Green : Color::Red)
+                ->badge(),
         ];
     }
 
