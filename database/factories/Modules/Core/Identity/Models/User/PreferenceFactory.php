@@ -31,8 +31,8 @@ class PreferenceFactory extends Factory
     {
         return [
             'key' => PreferenceKey::Appearance,
-            'value' => 'dark',
             new Preference()->user()->getForeignKeyName() => User::factory(),
+            'value' => 'dark',
         ];
     }
 

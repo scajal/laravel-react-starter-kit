@@ -118,7 +118,7 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
      */
     public function currentTeam(): BelongsTo
     {
-        return $this->belongsTo(Team::class, $this->getCurrentTeamForeignKey());
+        return $this->belongsTo(Team::class, 'current_team_id');
     }
 
     /**
@@ -141,14 +141,6 @@ class User extends Authenticatable implements FilamentUser, HasLocalePreference,
     public function getAuthPassword(): string
     {
         return '';
-    }
-
-    /**
-     * Get the current team's foreign key name.
-     */
-    public function getCurrentTeamForeignKey(): string
-    {
-        return 'current_team_id';
     }
 
     /**

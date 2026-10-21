@@ -29,8 +29,19 @@ class TeamFactory extends Factory
     public function definition(): array
     {
         return [
+            'is_active' => true,
             'name' => $name = fake()->unique()->company(),
             'slug' => Str::slug($name),
         ];
+    }
+
+    /**
+     * Indicate that the user has been deactivated by an operator.
+     */
+    public function inactive(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'is_active' => false,
+        ]);
     }
 }

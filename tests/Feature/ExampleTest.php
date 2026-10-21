@@ -1,18 +1,10 @@
 <?php
 
-namespace Tests\Feature;
+declare(strict_types=1);
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+it('redirects guests to the login page', function (): void {
+    /** @var \Tests\TestCase $this */
+    $response = $this->get('/');
 
-class ExampleTest extends TestCase
-{
-    use RefreshDatabase;
-
-    public function test_returns_a_successful_response()
-    {
-        $response = $this->get(route('home'));
-
-        $response->assertOk();
-    }
-}
+    $response->assertRedirect(route('login'));
+});

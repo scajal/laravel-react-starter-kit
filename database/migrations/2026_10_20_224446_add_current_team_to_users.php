@@ -17,7 +17,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table): void {
             $table->after(new User()->getKeyName(), function (Blueprint $table): void {
-                $table->foreignIdFor(Team::class, new User()->getCurrentTeamForeignKey())->nullable()->constrained()->nullOnDelete();
+                $table->foreignIdFor(Team::class, 'current_team_id')->nullable()->constrained()->nullOnDelete();
             });
         });
     }
@@ -28,7 +28,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table): void {
-            $table->dropForeignIdFor(Team::class, new User()->getCurrentTeamForeignKey());
+            $table->dropForeignIdFor(Team::class, 'current_team_id');
         });
     }
 };

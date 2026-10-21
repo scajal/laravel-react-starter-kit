@@ -31,8 +31,8 @@ class MembershipFactory extends Factory
     {
         return [
             'role' => Role::Member->value,
-            'team_id' => Team::factory(),
-            'user_id' => User::factory(),
+            new Membership()->team()->getForeignKey() => Team::factory(),
+            new Membership()->user()->getForeignKey() => User::factory(),
         ];
     }
 
@@ -49,7 +49,7 @@ class MembershipFactory extends Factory
     /**
      * Indicate that the membership is an admin.
      */
-    public function admin(): static
+    public function administrator(): static
     {
         return $this->state(fn (array $attributes): array => [
             'role' => Role::Administrator->value,
