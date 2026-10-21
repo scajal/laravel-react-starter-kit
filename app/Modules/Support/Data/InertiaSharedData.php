@@ -2,8 +2,8 @@
 
 namespace App\Modules\Support\Data;
 
-use App\Modules\Core\Identity\Data\TeamData;
-use App\Modules\Core\Identity\Data\UserData;
+use App\Modules\Core\Identity\Data\Models\TeamData;
+use App\Modules\Core\Identity\Data\Models\UserData;
 use App\Modules\Core\Identity\Enums\User\Appearance;
 use App\Modules\Core\Identity\Models\Team;
 use Spatie\TypeScriptTransformer\Attributes\LiteralTypeScriptType;
