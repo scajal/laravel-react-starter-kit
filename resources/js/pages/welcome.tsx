@@ -1,5 +1,7 @@
-import { Fragment } from "react/jsx-runtime";
-
 export default function Welcome() {
-    return <Fragment>Hello, world!</Fragment>;
+    return (
+        <div className="h-dvh w-wvh flex justify-center items-center">
+            Hello, world!
+        </div>
+    );
 }

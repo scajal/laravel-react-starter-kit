@@ -3,8 +3,11 @@
 namespace App\Modules\Support\Http\Middleware;
 
 use App\Modules\Core\Identity\Http\Middleware\HandleAppearance;
+use App\Modules\Core\Identity\Models\User;
+use Filament\Facades\Filament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Inertia\Inertia;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -37,6 +40,9 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        /** @var \App\Modules\Core\Identity\Models\User|null $user */
+        $user = $request->user();
+
         return [
             ...parent::share($request),
 
@@ -46,9 +52,19 @@ class HandleInertiaRequests extends Middleware
             // choice to the device.
             'appearance' => fn (): string => HandleAppearance::resolve($request),
 
+            // Indicate the permissions that the user has,
+            // including the ones in the current team.
+            'authorization' => fn (): array => [
+                'canAccessAdministration' => $user?->canAccessPanel(Filament::getPanel('administration')),
+                'teamPermissions' => $user?->currentTeam ? $user->teamRole($user->currentTeam)?->permissions() ?? [] : [],
+            ],
+
             // The resolved locale, read at render time so it
             // works for SSR requests too.
             'locale' => fn (): string => App::currentLocale(),
+
+            // The authenticated user.
+            'user' => Inertia::always($user),
         ];
     }
 }
