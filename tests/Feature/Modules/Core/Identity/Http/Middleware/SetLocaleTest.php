@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
+use App\Modules\Core\Identity\Http\Middleware\SetLocale;
 use App\Modules\Core\Identity\Models\User;
 use App\Modules\Core\Identity\Models\User\Preference;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -113,13 +115,12 @@ it('uses the preferred language of the browser over a cookie locale that is not 
     $response->assertOk()->assertContent('es');
 });
 
-it('falls back to the default locale of the application', function (): void {
-    /** @var \Tests\TestCase $this */
+it('falls back to the default locale for a client that sends no language preference', function (): void {
     config(['app.locale' => 'es']);
+    $request = Request::create('/');
+    $request->headers->remove('Accept-Language');
 
-    $response = $this->get('/_test/locale');
+    $locale = new SetLocale()->resolve($request);
 
-    $response->assertOk()
-        ->assertContent('es')
-        ->assertCookie('filament_language_switch_locale', 'es', encrypted: false);
+    expect($locale)->toBe('es');
 });

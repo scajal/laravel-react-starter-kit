@@ -88,7 +88,7 @@ class Team extends Model implements HasTimeline
      * Generate a unique slug for the team
      * off the name.
      */
-    protected static function generateSlug(string $name, ?string $exclude = null): string
+    protected static function generateSlug(string $name, int|string|null $exclude = null): string
     {
         // Generate a default slug based on the name.
         $default = Str::slug($name);

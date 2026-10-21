@@ -51,6 +51,8 @@ enum Role: string implements HasLabel
     /**
      * Check whether the role grants the given
      * permission.
+     *
+     * @codeCoverageIgnore Unreachable until the Permission enum declares its first case.
      */
     public function grants(Permission $permission): bool
     {

@@ -53,29 +53,25 @@ class SetLocale
      */
     public function resolve(Request $request): string
     {
-        // Define the callback for checking if a local is installed.
-        $locales = $this->locales();
-        $installed = fn (mixed $locale): bool => is_string($locale) && in_array($locale, $locales, true);
-
         // First, check if the locale is coming from
         // the route segment.
-        if ($installed($locale = $request->route('locale'))) {
+        if (PreferenceKey::Locale->accepts($locale = $request->route('locale'))) {
             return $locale;
         }
 
         // Then, check if the signed-in member stored one.
-        if ($installed($stored = $this->stored($request))) {
+        if (PreferenceKey::Locale->accepts($stored = $this->stored($request))) {
             return $stored;
         }
 
         // Then, check if the locale is coming from
         // the cookie.
-        if ($installed($cookie = $request->cookie(PreferenceKey::Locale->cookieName()))) {
+        if (PreferenceKey::Locale->accepts($cookie = $request->cookie(PreferenceKey::Locale->cookieName()))) {
             return $cookie;
         }
 
         // Then, the browser's preferred language, when it sent one.
-        if ($request->headers->has('Accept-Language') && $installed($preferred = $request->getPreferredLanguage($locales))) {
+        if ($request->headers->has('Accept-Language') && PreferenceKey::Locale->accepts($preferred = $request->getPreferredLanguage($this->locales()))) {
             return $preferred;
         }
 
