@@ -4,6 +4,19 @@ All notable changes to this starter kit are documented here. The format follows 
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-02
+
+### Added
+
+- Create, edit and delete users from the admin panel.
+- Edit and activity log actions on the user page in the admin panel.
+
+### Changed
+
+- The WorkOS dashboard link on the users list now sits in the header actions menu, next to the new create action.
+- Updated dependencies, including Laravel 13.39, Filament 5.11, Inertia 3.10 (React) and 3.7 (Laravel), lucide-react 1.66 and shadcn 4.23.
+- `package.json` now declares the MIT license.
+
 ## [0.1.0] - 2026-10-21
 
 ### Added
@@ -19,5 +32,6 @@ All notable changes to this starter kit are documented here. The format follows 
 - Type-safe routes through Wayfinder.
 - Installation through the Laravel installer: `laravel new my-app --using=scajal/laravel-react-starter-kit`.
 
-[Unreleased]: https://github.com/scajal/laravel-react-starter-kit/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/scajal/laravel-react-starter-kit/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/scajal/laravel-react-starter-kit/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/scajal/laravel-react-starter-kit/releases/tag/v0.1.0
