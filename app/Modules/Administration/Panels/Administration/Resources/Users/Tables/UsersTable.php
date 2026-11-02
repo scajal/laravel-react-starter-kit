@@ -67,6 +67,10 @@ class UsersTable
             Actions\ActionGroup::make([
                 Actions\ActionGroup::make([
                     Actions\ViewAction::make(),
+                    Actions\EditAction::make(),
+                ])->dropdown(false),
+                Actions\ActionGroup::make([
+                    Actions\DeleteAction::make(),
                 ])->dropdown(false),
             ]),
         ];

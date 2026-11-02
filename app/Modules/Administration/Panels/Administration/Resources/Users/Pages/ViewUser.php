@@ -41,6 +41,12 @@ class ViewUser extends ViewRecord
                         ->icon(LucideIcon::X)
                         ->color(Color::Red),
                 ])->dropdown(false),
+                Actions\ActionGroup::make([
+                    Actions\EditAction::make(),
+                ])->dropdown(false),
+                Actions\ActionGroup::make([
+                    \Relaticle\ActivityLog\Filament\Actions\ActivityLogAction::make(),
+                ])->dropdown(false),
             ]),
         ];
     }

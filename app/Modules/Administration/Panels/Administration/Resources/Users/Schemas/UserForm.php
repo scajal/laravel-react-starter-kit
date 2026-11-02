@@ -44,6 +44,7 @@ class UserForm
                 ->columns(2)
                 ->schema([
                     Infolists\Components\ImageEntry::make('avatar')
+                        ->hiddenOn([Operation::Create->value, Operation::Edit->value])
                         ->columnSpanFull()
                         ->alignCenter()
                         ->hiddenLabel()

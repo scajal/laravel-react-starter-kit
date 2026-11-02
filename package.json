@@ -4,6 +4,7 @@
     "private": true,
     "description": "An opinionated starter kit for the Laravel framework.",
     "type": "module",
+    "license": "MIT",
     "scripts": {
         "build": "vp build",
         "build:ssr": "vp build && vp build --ssr",
